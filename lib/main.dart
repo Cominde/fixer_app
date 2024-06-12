@@ -16,9 +16,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   bool onBoarding=CacheHelper.getData('onBoarding')??true ;
-  List<String> savedCodes = CacheHelper.getData('codes').whereType<String>().toList()??<String>[];
-  List<String> savedPasswords = CacheHelper.getData('passwords').whereType<String>().toList()??<String>[];
-  List<String> savedCarsInfo = CacheHelper.getData('carsInfo').whereType<String>().toList()??<String>[];
+  List<String> savedCodes = (CacheHelper.getData('codes') as List?)?.whereType<String>().toList() ?? <String>[];
+  List<String> savedPasswords = (CacheHelper.getData('passwords') as List?)?.whereType<String>().toList()??<String>[];
+  List<String> savedCarsInfo = (CacheHelper.getData('carsInfo') as List?)?.whereType<String>().toList()??<String>[];
   Map<String, List<String>> savedAccounts={
    'codes':savedCodes,
    'passwords':savedPasswords,

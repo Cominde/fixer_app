@@ -46,7 +46,7 @@ class AppCubit extends Cubit<AppCubitStates> {
       },
     ).then((value) {
       //print(value.data);
-      bool oldCode = (CacheHelper.getData('codes').whereType<String>().toList()??<String>[]).contains(carCode);
+      bool oldCode = ((CacheHelper.getData('codes') as List?)?.whereType<String>().toList()??<String>[]).contains(carCode);
       if(!oldCode) {
         CacheHelper.putDataInList(key: 'codes', value: carCode, unique: true);
         CacheHelper.putDataInList(key: 'passwords', value: password, unique: false);

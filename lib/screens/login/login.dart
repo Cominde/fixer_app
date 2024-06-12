@@ -13,6 +13,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 /*import 'dart:ui' as ui;*/
 
 
@@ -543,21 +545,28 @@ class _LoginStateState extends State<Login> {
                                               padding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 8, 0),
-                                              child: Card(
-                                                clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                                /*color: FlutterFlowTheme.of(context)
-                                              .customColor1,*/
-                                                elevation: 3,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(50),
-                                                ),
-                                                child: Image.asset(
-                                                  'assets/images/instagram.png',
-                                                  width: 50,
-                                                  height: 50,
-                                                  fit: BoxFit.cover,
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor: Colors.transparent,
+                                                onTap: () async {
+                                                  await launchUrl(Uri.parse('https://www.instagram.com/fixer.car.services?igsh=MTh4ZTNiOGRwOW9oeA=='));
+                                                },
+                                                child: Card(
+                                                  clipBehavior:
+                                                  Clip.antiAliasWithSaveLayer,
+                                                  elevation: 3,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(50),
+                                                  ),
+                                                  child: Image.asset(
+                                                    'assets/images/instagram.png',
+                                                    width: 50,
+                                                    height: 50,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -565,6 +574,68 @@ class _LoginStateState extends State<Login> {
                                               padding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 8, 0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor: Colors.transparent,
+                                                onTap: () async {
+                                                  await launchUrl(Uri.parse('https://www.facebook.com/CarsFixer?mibextid=ZbWKwL'));
+                                                },
+                                                child: Card(
+                                                  clipBehavior:
+                                                  Clip.antiAliasWithSaveLayer,
+                                                  color: const Color(0xFF090F13),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(50),
+                                                  ),
+                                                  child: Image.asset(
+                                                    'assets/images/facebook.png',
+                                                    width: 50,
+                                                    height: 50,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 8, 0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor: Colors.transparent,
+                                                onTap: () async {
+                                                  await launchUrl(Uri.parse('https://wa.me/201208799962'));
+                                                },
+                                                child: Card(
+                                                  clipBehavior:
+                                                  Clip.antiAliasWithSaveLayer,
+                                                  color: const Color(0xFF090F13),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(50),
+                                                  ),
+                                                  child: Image.asset(
+                                                    'assets/images/whatsapp.png',
+                                                    width: 50,
+                                                    height: 50,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor: Colors.transparent,
+                                              onTap: () async {
+                                                await launchUrl(Uri(scheme: 'tel', path: '01208799962',));
+                                              },
                                               child: Card(
                                                 clipBehavior:
                                                 Clip.antiAliasWithSaveLayer,
@@ -574,46 +645,11 @@ class _LoginStateState extends State<Login> {
                                                   BorderRadius.circular(50),
                                                 ),
                                                 child: Image.asset(
-                                                  'assets/images/facebook.png',
+                                                  'assets/images/telephone.png',
                                                   width: 50,
                                                   height: 50,
                                                   fit: BoxFit.cover,
                                                 ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 8, 0),
-                                              child: Card(
-                                                clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                                color: const Color(0xFF090F13),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(50),
-                                                ),
-                                                child: Image.asset(
-                                                  'assets/images/whatsapp.png',
-                                                  width: 50,
-                                                  height: 50,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                            Card(
-                                              clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                              color: const Color(0xFF090F13),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(50),
-                                              ),
-                                              child: Image.asset(
-                                                'assets/images/telephone.png',
-                                                width: 50,
-                                                height: 50,
-                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ],
