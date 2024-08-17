@@ -127,7 +127,7 @@ class _MyProfileState extends State<MyProfile> {
                     child: TextFormField(
                       controller: _model.textController1 ??=
                           TextEditingController(
-                            text: '${AppCubit.get(context).loginByCodeModel!.userData!.name}',
+                            text: AppCubit.get(context).loginByCodeModel!.userData!.name ?? '',
                           ),
                       focusNode: _model.textFieldFocusNode,
                       readOnly: true,
@@ -180,7 +180,7 @@ class _MyProfileState extends State<MyProfile> {
                     child: TextFormField(
                       controller: _model.emailAddressController1 ??=
                           TextEditingController(
-                            text: '${AppCubit.get(context).loginByCodeModel!.userData!.email}',
+                            text: AppCubit.get(context).loginByCodeModel!.userData!.email ?? '',
                           ),
                       focusNode: _model.emailAddressFocusNode1,
                       readOnly: true,
@@ -233,7 +233,7 @@ class _MyProfileState extends State<MyProfile> {
                     child: TextFormField(
                       controller: _model.emailAddressController2 ??=
                           TextEditingController(
-                            text: 'phone',
+                            text: AppCubit.get(context).loginByCodeModel!.userData!.phone ?? '',
                           ),
                       focusNode: _model.emailAddressFocusNode2,
                       readOnly: true,

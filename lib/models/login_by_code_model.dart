@@ -66,9 +66,11 @@ class GetCarByNumberModel{
   bool? repairing;
   int? distance;
   String?motorNumber;
+  String?chassisNumber;
   List<dynamic>?componentState;
   String?nextRepairDate;
   String?lastRepairDate;
+
 
   GetCarByNumberModel.fromJson(Map<String,dynamic>?json)
   {
@@ -93,6 +95,7 @@ class GetCarByNumberModel{
     nextRepairDate=json?['nextRepairDate'];
     lastRepairDate=json?['lastRepairDate'];
     distance=json?['distances'];
+    chassisNumber=json?['chassisNumber'];
 
 
 

@@ -112,7 +112,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
         _model.tempDefaultFocusNode1 ??= FocusNode();
 
         _model.tempDefaultController2 ??=
-            TextEditingController(text: 'chassis number');
+            TextEditingController(text: AppCubit.get(context).loginByCodeModel?.carData?.chassisNumber ?? '');
         _model.tempDefaultFocusNode2 ??= FocusNode();
 
         _model.tempDefaultController3 ??= TextEditingController(
@@ -608,6 +608,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                                       style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                         letterSpacing: 2,
                                       ),
                                     ),
@@ -636,6 +637,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                                             style: TextStyle(
                                               fontSize: 45,
                                               fontWeight: FontWeight.bold,
+                                              color: Colors.black,
                                               letterSpacing: 2,
                                             ),
                                           ),

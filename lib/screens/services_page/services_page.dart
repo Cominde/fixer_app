@@ -205,7 +205,7 @@ class _ServicesPageState extends State<ServicesPage>
                           padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 16),
                           child: Builder(
                             builder: (context) {
-                              return AppCubit.get(context).getServicesModel?.visits.length == 0 ? Center(
+                              return AppCubit.get(context).getServicesModel!.visits.isEmpty ? const Center(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

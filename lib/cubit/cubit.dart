@@ -165,7 +165,7 @@ class AppCubit extends Cubit<AppCubitStates> {
         Uri.parse(url),
         headers: headers,
       ).then((response) {
-        print (response);
+        //print (response);
         getHomePramsModel =
             GetHomePramsModel.fromJson(jsonDecode(response));
         if (getHomePramsModel !=null) {
