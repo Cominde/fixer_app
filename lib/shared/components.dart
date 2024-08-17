@@ -3,9 +3,8 @@
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_app/cubit/cubit.dart';
+import 'package:fixer_app/shared/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/get_services_model.dart';

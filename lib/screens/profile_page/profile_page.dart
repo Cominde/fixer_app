@@ -6,6 +6,7 @@ import 'package:fixer_app/screens/accounts/accounts.dart';
 import 'package:fixer_app/screens/login/login.dart';
 import 'package:fixer_app/screens/my_car/my_car.dart';
 import 'package:fixer_app/screens/my_profile/my_profile.dart';
+import 'package:fixer_app/shared/flutter_flow_theme.dart';
 /*import 'package:fixer_app/variables/language/language.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -41,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage>
     'containerOnActionTriggerAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
       applyInitialState: false,
-      effects: [
+      effectsBuilder: () => [
         MoveEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -54,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage>
     'containerOnActionTriggerAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
       applyInitialState: false,
-      effects: [
+      effectsBuilder: () => [
         MoveEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,

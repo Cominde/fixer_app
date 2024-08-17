@@ -1,12 +1,11 @@
 import 'package:fixer_app/network/local/cache_helper.dart';
 import 'package:fixer_app/screens/login/login.dart';
-import 'package:fixer_app/variables/language/language.dart';
+import 'package:fixer_app/shared/flutter_flow_theme.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
 as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:ui' as ui;
 
 
 import 'onboarding_model.dart';
@@ -74,7 +73,7 @@ class _OnboardingState extends State<Onboarding> {
                     height: 50,
                     fit: BoxFit.fitHeight,
                   ),
-                Padding(
+                /*Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
@@ -101,7 +100,7 @@ class _OnboardingState extends State<Onboarding> {
                       textDirection: ui.TextDirection.rtl,
                     ),
                   ),
-                )
+                )*/
               ],
             ),
           ),

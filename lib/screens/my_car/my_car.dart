@@ -2,6 +2,7 @@
 
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
+import 'package:fixer_app/shared/flutter_flow_theme.dart';
 /*import 'package:fixer_app/screens/car_performance/car_performance.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
@@ -29,7 +30,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
   final animationsMap = {
     'imageOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effects: [
+      effectsBuilder: () => [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,

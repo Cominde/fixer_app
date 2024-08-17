@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
+import 'package:fixer_app/shared/flutter_flow_theme.dart';
 import 'package:fixer_app/variables/language/language.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage>
   final animationsMap = {
     'imageOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effects: [
+      effectsBuilder: () => [
         FadeEffect(
           curve: Curves.easeOut,
           delay: 0.ms,

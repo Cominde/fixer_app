@@ -4,6 +4,7 @@ import 'package:fixer_app/cubit/states.dart';
 import 'package:fixer_app/screens/layout/layout.dart';
 import 'package:fixer_app/screens/login/login.dart';
 import 'package:fixer_app/shared/components.dart';
+import 'package:fixer_app/shared/flutter_flow_theme.dart';
 /*import 'package:fixer_app/variables/language/language.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

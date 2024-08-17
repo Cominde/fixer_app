@@ -13,19 +13,19 @@ class GetHomePramsModel{
     json=json?['data'];
     periodicRepairs=json?['periodicRepairs'];
     nonPeriodicRepairs=json?['nonperiodicRepairs'];
-    if (json?['createdDate']!=null) {
+    if (json?['createdDate']!=null && json?['createdDate']!='-/-/-') {
       createdDate=DateTime.parse(json?['createdDate']);
     }
-    if (json?['expectedDate']!=null) {
+    if (json?['expectedDate']!=null && json?['createdDate']!='-/-/-') {
       expectedDate=DateTime.parse(json?['expectedDate']);
     }
 
     completedServicesRatio=json?['completedServicesRatio']*1.0;
     state=json?['state'];
-    if(json?['lastRepairDate']!=null) {
+    if(json?['lastRepairDate']!=null && json?['createdDate']!='-/-/-') {
       lastRepairDate=DateTime.parse(json?['lastRepairDate']);
     }
-    if (json?['nextRepairDate']!=null) {
+    if (json?['nextRepairDate']!=null && json?['createdDate']!='-/-/-') {
       nextRepairDate=DateTime.parse(json?['nextRepairDate']);
     }
   }

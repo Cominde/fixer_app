@@ -1,7 +1,9 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
+import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/shared/components.dart';
+import 'package:fixer_app/shared/flutter_flow_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class _ServicesPageState extends State<ServicesPage>
   final animationsMap = {
     'textOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effects: [
+      effectsBuilder: () => [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -50,7 +52,7 @@ class _ServicesPageState extends State<ServicesPage>
     ),
     'containerOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effects: [
+      effectsBuilder: () => [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -69,7 +71,7 @@ class _ServicesPageState extends State<ServicesPage>
     ),
     'textOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effects: [
+      effectsBuilder: () => [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -88,7 +90,7 @@ class _ServicesPageState extends State<ServicesPage>
     ),
     'containerOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effects: [
+      effectsBuilder: () => [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -107,7 +109,7 @@ class _ServicesPageState extends State<ServicesPage>
     ),
     'containerOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effects: [
+      effectsBuilder: () => [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -203,7 +205,31 @@ class _ServicesPageState extends State<ServicesPage>
                           padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 16),
                           child: Builder(
                             builder: (context) {
-                              return ListView.builder(
+                              return AppCubit.get(context).getServicesModel?.visits.length == 0 ? Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(vertical: 32),
+                                      child: Image(image: AssetImage(Assets.imagesAutoMechanicRepairingVehicleEngineIsolatedFlatVectorIllustrationCartoonManFixingCheckingCarWithOpenHoodGarage),),
+                                    ),
+                                    Text('No Services Found',
+                                      style: TextStyle(
+                                          color: Color(0xFFF68B1E),
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.bold,
+
+                                          shadows: [
+                                            Shadow(color: Colors.black12, blurRadius: 10, offset: Offset(10,10))
+                                          ]
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )
+                                  ],
+                                ),
+                              ) :ListView.builder(
                                 padding: EdgeInsets.zero,
                                 primary: false,
                                 shrinkWrap: true,

@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:fixer_app/cubit/states.dart';
 import 'package:fixer_app/models/forget_password_model.dart';
 import 'package:fixer_app/models/get_home_prams_model.dart';
@@ -75,7 +74,7 @@ class AppCubit extends Cubit<AppCubitStates> {
     emit(AppForgetPasswordLoadingState());
 
     const url =
-        'https://fixer-backend-1.onrender.com/api/V1/auth/forgotPassword';
+        'https://fixer-backend-rtw4.onrender.com/api/V1/auth/forgotPassword';
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
       'carCode': int.parse(carCode),
@@ -105,7 +104,7 @@ class AppCubit extends Cubit<AppCubitStates> {
     {
       emit(AppGetCarByNumberLoadingState());
       String url =
-          'https://fixer-backend-1.onrender.com/api/V1/Garage/$carNumber';
+          'https://fixer-backend-rtw4.onrender.com/api/V1/Garage/$carNumber';
       final headers = {'Content-Type': 'application/json'};
       return read(
         Uri.parse(url),
@@ -131,7 +130,7 @@ class AppCubit extends Cubit<AppCubitStates> {
 
       emit(AppGetCarServicesByNumberLoadingState());
       String url =
-          'https://fixer-backend-1.onrender.com/api/V1/repairing/$carNumber';
+          'https://fixer-backend-rtw4.onrender.com/api/V1/repairing/$carNumber';
       final headers = {'Content-Type': 'application/json'};
       return read(
         Uri.parse(url),
@@ -140,6 +139,9 @@ class AppCubit extends Cubit<AppCubitStates> {
         getServicesModel =
             GetServicesModel.fromJson(jsonDecode(response));
         if (getServicesModel!.visits.isNotEmpty) {
+          //print('daret ya sey3');
+          emit(AppGetCarServicesByNumberSuccessState());
+        } else if (getServicesModel!.visits.isEmpty) {
           //print('daret ya sey3');
           emit(AppGetCarServicesByNumberSuccessState());
         } else {
@@ -157,13 +159,13 @@ class AppCubit extends Cubit<AppCubitStates> {
   void getHomePrams({
       required String carNumber,
   }) {
-      String url = 'https://fixer-backend-1.onrender.com/api/V1/Home/$carNumber';
+      String url = 'https://fixer-backend-rtw4.onrender.com/api/V1/Home/$carNumber';
       final headers = {'Content-Type': 'application/json'};
        read(
         Uri.parse(url),
         headers: headers,
       ).then((response) {
-        //print (response);
+        print (response);
         getHomePramsModel =
             GetHomePramsModel.fromJson(jsonDecode(response));
         if (getHomePramsModel !=null) {
