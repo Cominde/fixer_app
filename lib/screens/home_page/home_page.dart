@@ -94,6 +94,7 @@ class _HomePageState extends State<HomePage>
 
     return BlocConsumer<AppCubit,AppCubitStates>(
       listener: (context, state) {
+        print (state.toString());
 
       },
       builder: (context, state) {

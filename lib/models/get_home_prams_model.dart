@@ -19,8 +19,10 @@ class GetHomePramsModel{
     if (json?['expectedDate']!=null && json?['createdDate']!='-/-/-') {
       expectedDate=DateTime.parse(json?['expectedDate']);
     }
+    if (json?['completedServicesRatio']!=null ) {
+      completedServicesRatio=json?['completedServicesRatio']*1.0;
+    }
 
-    completedServicesRatio=json?['completedServicesRatio']*1.0;
     state=json?['state'];
     if(json?['lastRepairDate']!=null && json?['createdDate']!='-/-/-') {
       lastRepairDate=DateTime.parse(json?['lastRepairDate']);
