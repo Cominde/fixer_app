@@ -1,7 +1,6 @@
 import 'package:fixer_app/network/local/cache_helper.dart';
 import 'package:fixer_app/screens/login/login.dart';
-import 'package:fixer_app/shared/flutter_flow_theme.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
 as smooth_page_indicator;
 import 'package:flutter/material.dart';

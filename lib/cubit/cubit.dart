@@ -5,7 +5,7 @@ import 'package:fixer_app/models/login_by_code_model.dart';
 import 'package:fixer_app/network/local/cache_helper.dart';
 import 'package:fixer_app/shared/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:http/http.dart';
 
 import '../models/get_services_model.dart';

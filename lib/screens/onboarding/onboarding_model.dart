@@ -1,4 +1,4 @@
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'onboarding.dart' show Onboarding;
 import 'package:flutter/material.dart';
 

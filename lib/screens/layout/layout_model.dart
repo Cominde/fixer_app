@@ -1,4 +1,4 @@
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'layout.dart' show Layout;
 import 'package:flutter/material.dart';
 

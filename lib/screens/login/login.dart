@@ -5,11 +5,10 @@ import 'package:fixer_app/screens/accounts/accounts.dart';
 import 'package:fixer_app/screens/forget_password/forget_password.dart';
 import 'package:fixer_app/screens/layout/layout.dart';
 import 'package:fixer_app/shared/components.dart';
-import 'package:fixer_app/shared/flutter_flow_theme.dart';
 /*import 'package:fixer_app/variables/language/language.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

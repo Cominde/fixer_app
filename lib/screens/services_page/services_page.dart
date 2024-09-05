@@ -3,13 +3,12 @@ import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
 import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/shared/components.dart';
-import 'package:fixer_app/shared/flutter_flow_theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 
 import 'services_page_model.dart';
 export 'services_page_model.dart';
@@ -33,7 +32,7 @@ class _ServicesPageState extends State<ServicesPage>
   final animationsMap = {
     'textOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effectsBuilder: () => [
+      effects: [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -52,7 +51,7 @@ class _ServicesPageState extends State<ServicesPage>
     ),
     'containerOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effectsBuilder: () => [
+      effects: [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -71,7 +70,7 @@ class _ServicesPageState extends State<ServicesPage>
     ),
     'textOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effectsBuilder: () => [
+      effects: [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -90,7 +89,7 @@ class _ServicesPageState extends State<ServicesPage>
     ),
     'containerOnPageLoadAnimation2': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effectsBuilder: () => [
+      effects: [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
@@ -109,7 +108,7 @@ class _ServicesPageState extends State<ServicesPage>
     ),
     'containerOnPageLoadAnimation3': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
-      effectsBuilder: () => [
+      effects: [
         FadeEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,

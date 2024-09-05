@@ -1,8 +1,7 @@
 import 'package:fixer_app/screens/home_page/home_page.dart';
 import 'package:fixer_app/screens/profile_page/profile_page.dart';
 import 'package:fixer_app/screens/services_page/services_page.dart';
-import 'package:fixer_app/shared/flutter_flow_theme.dart';
-import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
