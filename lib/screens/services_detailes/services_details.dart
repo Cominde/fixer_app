@@ -195,9 +195,17 @@ class _ServicesDetailsState extends State<ServicesDetails>
   void initState() {
     super.initState();
     _model = createModel(context, () => ServicesDetailsModel());
-    totalServices = widget.visit.services.map((service) => service.price).reduce((a, b) => a! + b!)??0;
-    totalComponents = widget.visit.components.map((component) => component.price).reduce((a, b) => a! + b!)??0;
-    totalAdditions = widget.visit.additions.map((addition) => addition.price).reduce((a, b) => a! + b!)??0;
+    if(widget.visit.services.isNotEmpty) {
+      totalServices = widget.visit.services.map((service) => service.price).reduce((a, b) => a! + b!)??0;
+    }
+
+    if(widget.visit.components.isNotEmpty) {
+      totalComponents = widget.visit.components.map((component) => component.price).reduce((a, b) => a! + b!)??0;
+    }
+
+    if(widget.visit.additions.isNotEmpty) {
+      totalAdditions = widget.visit.additions.map((addition) => addition.price).reduce((a, b) => a! + b!)??0;
+    }
 
     setupAnimations(
       animationsMap.values.where((anim) =>
