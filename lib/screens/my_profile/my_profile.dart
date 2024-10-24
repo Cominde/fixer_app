@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
+import 'package:fixer_app/generated/assets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
@@ -77,7 +79,7 @@ class _MyProfileState extends State<MyProfile> {
               ),
             ),
             title: Text(
-              'My Profile',
+              'My Profile'.tr(),
               style: FlutterFlowTheme.of(context).bodyMedium,
             ),
             actions: const [],
@@ -113,7 +115,7 @@ class _MyProfileState extends State<MyProfile> {
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
-                                'assets/images/man.png',
+                                Assets.imagesProfileAvatar,
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -133,9 +135,9 @@ class _MyProfileState extends State<MyProfile> {
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Full Name',
+                        labelText: 'Full Name'.tr(),
                         labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                        hintText: 'Your full name...',
+                        hintText: 'Your full name...'.tr(),
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -186,9 +188,9 @@ class _MyProfileState extends State<MyProfile> {
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Email Address',
+                        labelText: 'Email Address'.tr(),
                         labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                        hintText: 'Your email..',
+                        hintText: 'Your email...'.tr(),
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -239,9 +241,9 @@ class _MyProfileState extends State<MyProfile> {
                       readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Phone Number',
+                        labelText: 'Phone Number'.tr(),
                         labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                        hintText: 'Your email..',
+                        hintText: 'Your phone...'.tr(),
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(

@@ -1,7 +1,10 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
-import 'package:fixer_app/variables/language/language.dart';
+import 'package:fixer_app/generated/assets.dart';
+import 'package:fixer_app/network/local/cache_helper.dart';
+import 'package:fixer_app/shared/constant_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -93,7 +96,7 @@ class _HomePageState extends State<HomePage>
 
     return BlocConsumer<AppCubit,AppCubitStates>(
       listener: (context, state) {
-        print (state.toString());
+        //print (state.toString());
 
       },
       builder: (context, state) {
@@ -121,7 +124,7 @@ class _HomePageState extends State<HomePage>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Your Car',
+                            'Your Car'.tr(),
                             style: FlutterFlowTheme.of(context).bodySmall,
                           ),
                         ],
@@ -143,7 +146,7 @@ class _HomePageState extends State<HomePage>
                       ),
                     ),
                     Image.asset(
-                      'assets/images/865452244861.png',
+                      Assets.imagesGrayTeslaCar,
                       width: MediaQuery.sizeOf(context).width,
                       height: 240,
                       fit: BoxFit.cover,
@@ -160,7 +163,7 @@ class _HomePageState extends State<HomePage>
                         backgroundColor: Colors.grey.withOpacity(0.4),
                         barRadius: const Radius.circular(40),
                         padding: EdgeInsets.zero,
-                        isRTL: !engApp,
+                        isRTL: CacheHelper.getData(ConstantData.kLung) != 'en',
                       ),
                     ),
                     Padding(
@@ -169,23 +172,6 @@ class _HomePageState extends State<HomePage>
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          /*Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                          child: Text(
-                            'Charge',
-                            style: FlutterFlowTheme.of(context).bodySmall,
-                          ),
-                        ),
-                        Text(
-                          '70%',
-                          style: FlutterFlowTheme.of(context).displaySmall,
-                        ),
-                      ],
-                    ),*/
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -193,7 +179,7 @@ class _HomePageState extends State<HomePage>
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: Text(
-                                  'Last Check',
+                                  'Last Visit'.tr(),
                                   style: FlutterFlowTheme.of(context).bodySmall,
                                 ),
                               ),
@@ -213,17 +199,17 @@ class _HomePageState extends State<HomePage>
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: Text(
-                                  'Status',
+                                  'Status'.tr(),
                                   style: FlutterFlowTheme.of(context).bodySmall,
                                 ),
                               ),
                               Text(
-                                '${AppCubit.get(context).getHomePramsModel?.state}',
+                                AppCubit.get(context).getHomePramsModel?.state??''.tr(),
                                 style: FlutterFlowTheme.of(context)
                                     .displaySmall
                                     .override(
                                     fontFamily: 'Outfit',
-                                    color: const Color(0xFFF68B1E),
+                                    color: AppCubit.get(context).getHomePramsModel?.state == "Repair"? const Color(0xFFF68B1E) : AppCubit.get(context).getHomePramsModel?.state == "Good"? const Color(0xff04A24C) : const Color(0xffDF3F3F),
                                     fontSize: 25
                                 ),
                               ),
@@ -232,7 +218,7 @@ class _HomePageState extends State<HomePage>
                         ],
                       ),
                     ),
-                    if(AppCubit.get(context).getHomePramsModel?.expectedDate != null)Container(
+                    if(AppCubit.get(context).getHomePramsModel?.state == 'Repair')Container(
                       width: MediaQuery.sizeOf(context).width * 0.9,
                       height: 70,
                       decoration: BoxDecoration(
@@ -249,26 +235,6 @@ class _HomePageState extends State<HomePage>
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          /*Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              'assets/images/imageLogo@3x.png',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),*/
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 16, 0),
@@ -283,7 +249,7 @@ class _HomePageState extends State<HomePage>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Text(
-                                          'The Expected completion date ${AppCubit.get(context).getHomePramsModel?.expectedDate?.day}/${AppCubit.get(context).getHomePramsModel?.expectedDate?.month}/${AppCubit.get(context).getHomePramsModel?.expectedDate?.year}',
+                                          '${'The Expected completion date'.tr()} ${AppCubit.get(context).getHomePramsModel?.expectedDate?.day??'-'}/${AppCubit.get(context).getHomePramsModel?.expectedDate?.month??'-'}/${AppCubit.get(context).getHomePramsModel?.expectedDate?.year??'-'}',
 
                                           style: FlutterFlowTheme.of(context)
                                               .titleSmall
@@ -354,10 +320,11 @@ class _HomePageState extends State<HomePage>
                                   Padding(
                                     padding:
                                     const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                                    child: Icon(
-                                      Icons.bolt,
-                                      color: FlutterFlowTheme.of(context).alternate,
-                                      size: 44,
+                                    child: Image(
+                                      image: AssetImage(Theme.of(context).brightness == Brightness.dark ? Assets.imagesRegularServiceDark : Assets.imagesRegularServiceLight),
+                                      width: 50,
+                                      height: 50,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                   Padding(
@@ -380,7 +347,7 @@ class _HomePageState extends State<HomePage>
                                       padding:
                                       const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
                                       child: Text(
-                                        'Periodic repairs',
+                                        'Regular Services'.tr(),
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.getFont(
                                           'Lexend Deca',
@@ -423,10 +390,11 @@ class _HomePageState extends State<HomePage>
                                 Padding(
                                   padding:
                                   const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                                  child: Icon(
-                                    Icons.electric_car,
-                                    color: FlutterFlowTheme.of(context).alternate,
-                                    size: 44,
+                                  child: Image(
+                                    image: AssetImage(Theme.of(context).brightness == Brightness.dark ? Assets.imagesNonRegularServiceDark : Assets.imagesNonRegularServiceLight),
+                                    width: 50,
+                                    height: 50,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                                 Padding(
@@ -448,7 +416,7 @@ class _HomePageState extends State<HomePage>
                                     padding:
                                     const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
                                     child: Text(
-                                      'Non periodic repairs',
+                                      'Non-Regular Services'.tr(),
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.getFont(
                                         'Lexend Deca',
@@ -467,10 +435,10 @@ class _HomePageState extends State<HomePage>
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 12),
                       child: Container(
-                        width: MediaQuery.sizeOf(context).width * 0.9,
+                        width: MediaQuery.sizeOf(context).width * 0.87,
                         height: 120,
                         decoration: BoxDecoration(
-                          color: const Color(0xff04A24C),
+                          color: AppCubit.get(context).getHomePramsModel?.state == 'Good' ? const Color(0xff04A24C) : const Color(0xffDF3F3F),
                           boxShadow: const [
                             BoxShadow(
                               blurRadius: 4,
@@ -512,7 +480,7 @@ class _HomePageState extends State<HomePage>
                                 padding:
                                 const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
                                 child: Text(
-                                  'Next Repair Date',
+                                  'Next Service Date'.tr(),
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.getFont(
                                     'Lexend Deca',

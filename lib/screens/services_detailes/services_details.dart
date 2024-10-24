@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
+import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/models/get_services_model.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -227,151 +229,185 @@ class _ServicesDetailsState extends State<ServicesDetails>
       isLoading = true;
     });
 
+    const int itemsPerPage = 13; // Set the number of items per page
+    final visitComponents = widget.visit.components;
+    final visitAdditions = widget.visit.additions;
+    final visitServices = widget.visit.services;
+
+    // Combine all the widgets
+    final List<dynamic> allItems = [...visitComponents, ...visitAdditions, ...visitServices];
+
+    // Split into chunks to handle pagination
+    int currentIndex = 0;
+    int currentPage = 1;
+    int numberOfPages = (allItems.length / itemsPerPage).ceil();
+
     pdf = pw.Document();
 
-    rootBundle.load('assets/images/logo.png').then((value) {
+    rootBundle.load(Assets.imagesBillLogo).then((value) {
       pw.MemoryImage image = pw.MemoryImage(value.buffer.asUint8List());
 
       rootBundle.load("assets/fonts/Hacen_Tunisia/Hacen-Tunisia.ttf").then((value) {
         pw.Font myFont = pw.Font.ttf(value);
 
-        pdf.addPage(pw.Page(
-            pageFormat: PdfPageFormat.a4,
-            build: (pw.Context context) {
-              return pw.Expanded(
-                  child: pw.Container(
-                      child: pw.Stack(
-                          children: [
-                            pw.Padding(
-                                padding: const pw.EdgeInsets.all(0),
-                                child: pw.Expanded(
-                                    child: pw.Column(
-                                        mainAxisAlignment: pw.MainAxisAlignment.start,
-                                        mainAxisSize: pw.MainAxisSize.max,
-                                        crossAxisAlignment: pw.CrossAxisAlignment.end,
-                                        children: [
-                                          pw.Row(
-                                            mainAxisSize: pw.MainAxisSize.max,
-                                            mainAxisAlignment: pw.MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                                            children: [
-                                              pw.Expanded(
-                                                  flex: 2,
-                                                  child: pw.SizedBox(
-                                                      width: 160,
-                                                      height: 90,
-                                                      child: pw.Image(image)
+        while (currentIndex < allItems.length) {
+          final endIndex = currentIndex + itemsPerPage;
+          final itemsToDisplay = allItems.sublist(currentIndex, endIndex > allItems.length ? allItems.length : endIndex);
+          final pageNumber = currentPage++;
+
+          List<Service> services=[];
+          List<Addition> additions=[];
+          List<Component> components=[];
+
+          for(final item in itemsToDisplay) {
+            if(item is Service) {
+              services.add(item);
+            } else if(item is Addition) {
+              additions.add(item);
+            } else if(item is Component) {
+              components.add(item);
+            }
+          }
+
+          pdf.addPage(pw.Page(
+              pageFormat: PdfPageFormat.a4,
+              margin: pw.EdgeInsets.all(24),
+              build: (pw.Context context) {
+                return pw.Expanded(
+                    child: pw.Container(
+                        child: pw.Stack(
+                            children: [
+                              pw.Padding(
+                                  padding: const pw.EdgeInsets.all(0),
+                                  child: pw.Expanded(
+                                      child: pw.Column(
+                                          mainAxisAlignment: pw.MainAxisAlignment.start,
+                                          mainAxisSize: pw.MainAxisSize.max,
+                                          crossAxisAlignment: pw.CrossAxisAlignment.end,
+                                          children: [
+                                            pw.Row(
+                                                mainAxisSize: pw.MainAxisSize.max,
+                                                mainAxisAlignment: pw.MainAxisAlignment.spaceEvenly,
+                                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                                children: [
+                                                  pw.Expanded(
+                                                    flex: 2,
+                                                    child: pw.SizedBox(
+                                                        width: 160,
+                                                        height: 90,
+                                                        child: pw.Image(image)
+                                                    ),
                                                   ),
-                                              ),
-                                              pw.Expanded(
-                                                  flex: 3,
-                                                  child: pw.Column(
-                                                      mainAxisAlignment: pw.MainAxisAlignment.center,
-                                                      crossAxisAlignment: pw.CrossAxisAlignment.center,
-                                                      mainAxisSize: pw.MainAxisSize.max,
-                                                      children: [
-                                                        pw.SizedBox(
-                                                          height: 25
-                                                        ),
-                                                        boldText(
-                                                            'بيان اسعار',myFont
-                                                        ),
-                                                        pw.Container(
-                                                          color: const PdfColor(0.90196,0.90196,0.90196),
-                                                          child: pw.Row(
-                                                              mainAxisAlignment: pw.MainAxisAlignment.center,
-                                                              crossAxisAlignment: pw.CrossAxisAlignment.center,
-                                                              mainAxisSize: pw.MainAxisSize.max,
-                                                              children: [
-                                                                boldText(
-                                                                  '***',myFont
-                                                                ),
-                                                              ]
-                                                          ),
-                                                        ),
-                                                      ]
-                                                  ),
-                                              ),
-                                              pw.Expanded(
-                                                flex: 2,
-                                                child: pw.Column(
-                                                    mainAxisAlignment: pw.MainAxisAlignment.end,
-                                                    crossAxisAlignment: pw.CrossAxisAlignment.end,
-                                                    mainAxisSize: pw.MainAxisSize.max,
-                                                    children: [
-                                                      pw.SizedBox(
-                                                        height: 70
-                                                      ),
-                                                      pw.Row(
-                                                         mainAxisAlignment: pw.MainAxisAlignment.end,
-                                                         crossAxisAlignment: pw.CrossAxisAlignment.center,
-                                                         mainAxisSize: pw.MainAxisSize.max,
+                                                  pw.Expanded(
+                                                    flex: 3,
+                                                    child: pw.Column(
+                                                        mainAxisAlignment: pw.MainAxisAlignment.center,
+                                                        crossAxisAlignment: pw.CrossAxisAlignment.center,
+                                                        mainAxisSize: pw.MainAxisSize.max,
                                                         children: [
                                                           pw.SizedBox(
-                                                            width: 70,
-                                                            child: pw.Table(
-                                                                border: pw.TableBorder.all(
-                                                                    width: 1,
-                                                                    color: PdfColor.fromHex('000000')
-                                                                ),
+                                                              height: 25
+                                                          ),
+                                                          boldText(
+                                                              'بيان اسعار',myFont
+                                                          ),
+                                                          pw.Container(
+                                                            color: const PdfColor(0.90196,0.90196,0.90196),
+                                                            child: pw.Row(
+                                                                mainAxisAlignment: pw.MainAxisAlignment.center,
+                                                                crossAxisAlignment: pw.CrossAxisAlignment.center,
+                                                                mainAxisSize: pw.MainAxisSize.max,
                                                                 children: [
-                                                                  pw.TableRow(
-                                                                      children: [
-                                                                        normalText(
-                                                                            '${widget.visit.createdAt?.year}-${widget.visit.createdAt?.month}-${widget.visit.createdAt?.day}',myFont
-                                                                        ),
-                                                                      ]
-                                                                  ),
-                                                                  pw.TableRow(
-                                                                      children: [
-                                                                        normalText(
-                                                                            '${widget.visit.expectedDate?.year}-${widget.visit.expectedDate?.month}-${widget.visit.expectedDate?.day}',myFont
-                                                                        ),
-                                                                      ]
+                                                                  boldText(
+                                                                      widget.visit.invoiceID??"***",myFont
                                                                   ),
                                                                 ]
                                                             ),
                                                           ),
-                                                          pw.Table(
+                                                        ]
+                                                    ),
+                                                  ),
+                                                  pw.Expanded(
+                                                    flex: 2,
+                                                    child: pw.Column(
+                                                        mainAxisAlignment: pw.MainAxisAlignment.end,
+                                                        crossAxisAlignment: pw.CrossAxisAlignment.end,
+                                                        mainAxisSize: pw.MainAxisSize.max,
+                                                        children: [
+                                                          pw.SizedBox(
+                                                            height: 70,
+                                                            child: allItems.length > 13 ? normalText('$pageNumber OF $numberOfPages',myFont) : null,
+                                                          ),
+                                                          pw.Row(
+                                                              mainAxisAlignment: pw.MainAxisAlignment.end,
+                                                              crossAxisAlignment: pw.CrossAxisAlignment.center,
+                                                              mainAxisSize: pw.MainAxisSize.max,
                                                               children: [
-                                                                pw.TableRow(
+                                                                pw.SizedBox(
+                                                                  width: 70,
+                                                                  child: pw.Table(
+                                                                      border: pw.TableBorder.all(
+                                                                          width: 1,
+                                                                          color: PdfColor.fromHex('000000')
+                                                                      ),
+                                                                      children: [
+                                                                        pw.TableRow(
+                                                                            children: [
+                                                                              normalText(
+                                                                                  '${widget.visit.createdAt?.year}-${widget.visit.createdAt?.month}-${widget.visit.createdAt?.day}',myFont
+                                                                              ),
+                                                                            ]
+                                                                        ),
+                                                                        pw.TableRow(
+                                                                            children: [
+                                                                              normalText(
+                                                                                  '${widget.visit.expectedDate?.year}-${widget.visit.expectedDate?.month}-${widget.visit.expectedDate?.day}',myFont
+                                                                              ),
+                                                                            ]
+                                                                        ),
+                                                                      ]
+                                                                  ),
+                                                                ),
+                                                                pw.Table(
                                                                     children: [
-                                                                      boldText(
-                                                                          'تاريخ الدخول',myFont
+                                                                      pw.TableRow(
+                                                                          children: [
+                                                                            boldText(
+                                                                                'تاريخ الدخول',myFont
+                                                                            ),
+                                                                          ]
+                                                                      ),
+                                                                      pw.TableRow(
+                                                                          children: [
+                                                                            boldText(
+                                                                                'تاريخ الخروج',myFont
+                                                                            ),
+                                                                          ]
                                                                       ),
                                                                     ]
                                                                 ),
-                                                                pw.TableRow(
-                                                                    children: [
-                                                                      boldText(
-                                                                          'تاريخ الخروج',myFont
-                                                                      ),
-                                                                    ]
-                                                                ),
+
                                                               ]
                                                           ),
-
                                                         ]
-                                                      ),
-                                                    ]
-                                                ),
-                                              ),
-                                            ]
-                                          ),
-                                          pw.SizedBox(
-                                            height: 2
-                                          ),
-                                          pw.Container(
-                                            width: double.infinity,
-                                            height: 2,
-                                            color: const PdfColor(0,0,0)
-                                          ),
-                                          pw.SizedBox(
+                                                    ),
+                                                  ),
+                                                ]
+                                            ),
+                                            pw.SizedBox(
+                                                height: 2
+                                            ),
+                                            pw.Container(
+                                                width: double.infinity,
+                                                height: 2,
+                                                color: const PdfColor(0,0,0)
+                                            ),
+                                            pw.SizedBox(
                                               height: 4,
-                                          ),
-                                          pw.Row(
-                                              children: [
-                                                pw.Expanded(
+                                            ),
+                                            pw.Row(
+                                                children: [
+                                                  pw.Expanded(
                                                     flex: 2,
                                                     child: pw.Table(
                                                         border: pw.TableBorder.all(
@@ -409,607 +445,635 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                                           ),
                                                         ]
                                                     ),
-                                                ),
-                                                pw.Expanded(
-                                                  flex: 1,
-                                                  child: pw.Table(
-                                                      children: [
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'اسم المندوب :',myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'تليفون :',myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'موديل :' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'كود السيارة :' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                      ]
                                                   ),
-                                                ),
-                                                pw.SizedBox(
-                                                  width: 10
-                                                ),
-                                                pw.Expanded(
-                                                  flex: 1,
-                                                  child: pw.Table(
-                                                      border: pw.TableBorder.all(
-                                                          width: 1,
-                                                          color: PdfColor.fromHex('000000')
-                                                      ),
-                                                      children: [
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  widget.cubit.loginByCodeModel?.userData?.name??'***' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  widget.cubit.loginByCodeModel?.carData?.carIdNumber??'***' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  widget.cubit.loginByCodeModel?.carData?.brand??'***' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  widget.cubit.loginByCodeModel?.carData?.distance.toString()??'***' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                      ]
+                                                  pw.Expanded(
+                                                    flex: 1,
+                                                    child: pw.Table(
+                                                        children: [
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'اسم المندوب :',myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'تليفون :',myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'موديل :' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'كود السيارة :' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                        ]
+                                                    ),
                                                   ),
-                                                ),
-                                                pw.Expanded(
-                                                  flex: 1,
-                                                  child: pw.Table(
-                                                      children: [
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'اسم العميل :',myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'رقم الشاسيه :',myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'نوع العربية :' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'كيلومتر :' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                      ]
+                                                  pw.SizedBox(
+                                                      width: 10
                                                   ),
-                                                ),
-                                                pw.SizedBox(
-                                                    width: 10
-                                                ),
-                                                pw.Expanded(
-                                                  flex: 1,
-                                                  child: pw.Table(
-                                                      border: pw.TableBorder.all(
-                                                          width: 1,
-                                                          color: PdfColor.fromHex('000000')
-                                                      ),
-                                                      children: [
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  '***' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  widget.cubit.loginByCodeModel?.carData?.carNumber??'***' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  '***' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  widget.cubit.loginByCodeModel?.carData?.color??'***' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                      ]
-                                                  ),
-                                                ),
-                                                pw.Expanded(
-                                                  flex: 1,
-                                                  child: pw.Table(
-                                                      children: [
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'رقم امر التشغيل :',myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'رقم اللوحة :',myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'مهندس الاستقبال :' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                        pw.TableRow(
-                                                            children: [
-                                                              normalText(
-                                                                  'اللون :' ,myFont
-                                                              ),
-                                                            ]
-                                                        ),
-                                                      ]
-                                                  ),
-                                                ),
-                                              ]
-                                          ),
-                                          pw.SizedBox(
-                                            height: 5,
-                                          ),
-                                          pw.Center(
-                                            child: boldText(
-                                                'قطع غيار + اعمال خارجية',myFont
-                                            ),
-                                          ),
-                                          pw.SizedBox(
-                                            height: 5,
-                                          ),
-                                          pw.Table(
-                                              border: pw.TableBorder.all(
-                                                  width: 1,
-                                                  color: PdfColor.fromHex('000000')
-                                              ),
-                                              children: [
-                                                pw.TableRow(
-                                                    decoration: pw.BoxDecoration(
+                                                  pw.Expanded(
+                                                    flex: 1,
+                                                    child: pw.Table(
                                                         border: pw.TableBorder.all(
                                                             width: 1,
                                                             color: PdfColor.fromHex('000000')
                                                         ),
-                                                        color: const PdfColor(0.90196,0.90196,0.90196),
+                                                        children: [
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    widget.cubit.loginByCodeModel?.userData?.name??'***' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    widget.cubit.loginByCodeModel?.carData?.carIdNumber??'***' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    widget.cubit.loginByCodeModel?.carData?.brand??'***' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    widget.cubit.loginByCodeModel?.carData?.distance.toString()??'***' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                        ]
                                                     ),
-                                                    children: [
-                                                      normalText(
-                                                          'القيمة',myFont
-                                                      ),
-                                                      normalText(
-                                                          'السعر',myFont
-                                                      ),
-                                                      normalText(
-                                                          'الكمية',myFont
-                                                      ),
-                                                      normalText(
-                                                          'اسم الصنف',myFont
-                                                      ),
-                                                    ]
-                                                ),
-                                                for(int i=0; i<widget.visit.components.length; i++)...[
-                                                  pw.TableRow(
-                                                      decoration: pw.BoxDecoration(
-                                                          border: pw.TableBorder.all(
-                                                              width: 1,
-                                                              color: PdfColor.fromHex('000000')
-                                                          )
-                                                      ),
-                                                      children: [
-                                                        normalText(
-                                                            (widget.visit.components[i].price!*widget.visit.components[i].quantity!).toString(),myFont
-                                                        ),
-                                                        normalText(
-                                                            widget.visit.components[i].price.toString(),myFont
-                                                        ),
-                                                        normalText(
-                                                            widget.visit.components[i].quantity.toString(),myFont
-                                                        ),
-                                                        normalText(
-                                                            widget.visit.components[i].name!,myFont
-                                                        ),
-                                                      ]
                                                   ),
-                                                ],
-                                                for(int i=0; i<widget.visit.additions.length; i++)...[
-                                                  pw.TableRow(
-                                                      decoration: pw.BoxDecoration(
-                                                          border: pw.TableBorder.all(
-                                                              width: 1,
-                                                              color: PdfColor.fromHex('000000')
-                                                          )
-                                                      ),
-                                                      children: [
-                                                        normalText(
-                                                            widget.visit.additions[i].price!.toString(),myFont
-                                                        ),
-                                                        normalText(
-                                                            widget.visit.additions[i].price.toString(),myFont
-                                                        ),
-                                                        normalText(
-                                                            '1',myFont
-                                                        ),
-                                                        normalText(
-                                                            widget.visit.additions[i].name!,myFont
-                                                        ),
-                                                      ]
+                                                  pw.Expanded(
+                                                    flex: 1,
+                                                    child: pw.Table(
+                                                        children: [
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'اسم العميل :',myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'رقم الشاسيه :',myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'نوع العربية :' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'كيلومتر :' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                        ]
+                                                    ),
                                                   ),
-                                                ],
-                                              ]
-                                          ),
-                                          pw.SizedBox(
-                                            height: 5,
-                                          ),
-                                          pw.Center(
-                                            child: boldText(
-                                                'مصنعات',myFont
-                                            ),
-                                          ),
-                                          pw.SizedBox(
-                                            height: 5,
-                                          ),
-                                          pw.Table(
-                                              border: pw.TableBorder.all(
-                                                  width: 1,
-                                                  color: PdfColor.fromHex('000000')
-                                              ),
-                                              children: [
-                                                pw.TableRow(
-                                                    decoration: pw.BoxDecoration(
+                                                  pw.SizedBox(
+                                                      width: 10
+                                                  ),
+                                                  pw.Expanded(
+                                                    flex: 1,
+                                                    child: pw.Table(
                                                         border: pw.TableBorder.all(
                                                             width: 1,
                                                             color: PdfColor.fromHex('000000')
                                                         ),
-                                                        color: const PdfColor(0.90196,0.90196,0.90196),
+                                                        children: [
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    '***' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    widget.cubit.loginByCodeModel?.carData?.carNumber??'***' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    '***' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    widget.cubit.loginByCodeModel?.carData?.color??'***' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                        ]
                                                     ),
-                                                    children: [
-                                                      normalText(
-                                                          'القيمة',myFont
-                                                      ),
-                                                      normalText(
-                                                          'السعر',myFont
-                                                      ),
-                                                      normalText(
-                                                          'الكمية',myFont
-                                                      ),
-                                                      normalText(
-                                                          'اسم الصنف',myFont
-                                                      ),
-                                                    ]
-                                                ),
-                                                for(int i=0; i<widget.visit.services.length; i++)...[
-                                                  pw.TableRow(
-                                                      decoration: pw.BoxDecoration(
-                                                          border: pw.TableBorder.all(
-                                                              width: 1,
-                                                              color: PdfColor.fromHex('000000')
-                                                          )
-                                                      ),
-                                                      children: [
-                                                        normalText(
-                                                            widget.visit.services[i].price!.toString(),myFont
-                                                        ),
-                                                        normalText(
-                                                            widget.visit.services[i].price.toString(),myFont
-                                                        ),
-                                                        normalText(
-                                                            '1',myFont
-                                                        ),
-                                                        normalText(
-                                                            widget.visit.services[i].name!,myFont
-                                                        ),
-                                                      ]
                                                   ),
-                                                ],
-                                              ]
-                                          ),
-                                          pw.Expanded(
-                                            child: pw.SizedBox(),
-                                          ),
-                                          pw.Row(
-                                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                                            mainAxisSize: pw.MainAxisSize.max,
-                                            children: [
-                                              pw.Expanded(
-                                                child: pw.Table(
-                                                    border: pw.TableBorder.all(
-                                                        width: 1,
-                                                        color: PdfColor.fromHex('000000')
+                                                  pw.Expanded(
+                                                    flex: 1,
+                                                    child: pw.Table(
+                                                        children: [
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'رقم امر التشغيل :',myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'رقم اللوحة :',myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'مهندس الاستقبال :' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              children: [
+                                                                normalText(
+                                                                    'اللون :' ,myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                        ]
                                                     ),
-                                                    children: [
-                                                      pw.TableRow(
-                                                          decoration: pw.BoxDecoration(
-                                                            border: pw.TableBorder.all(
-                                                                width: 1,
-                                                                color: PdfColor.fromHex('000000')
-                                                            ),
-                                                          ),
-                                                          children: [
-                                                            normalText(
-                                                                totalServices.toString(),myFont
-                                                            ),
-                                                            pw.Container(
-                                                              color: const PdfColor(0.90196,0.90196,0.90196),
-                                                              child: normalText(
-                                                                  'صافي المصنعات',myFont
-                                                              ),
-                                                            ),
-                                                          ]
-                                                      ),
-                                                      pw.TableRow(
-                                                          decoration: pw.BoxDecoration(
-                                                            border: pw.TableBorder.all(
-                                                                width: 1,
-                                                                color: PdfColor.fromHex('000000')
-                                                            ),
-                                                          ),
-                                                          children: [
-                                                            normalText(
-                                                                (totalServices+widget.visit.discount!).toString(),myFont
-                                                            ),
-                                                            pw.Container(
-                                                              color: const PdfColor(0.90196,0.90196,0.90196),
-                                                              child: normalText(
-                                                                  'صافي المصنعات بعد الخصم',myFont
-                                                              ),
-                                                            ),
-                                                          ]
-                                                      ),
-                                                      pw.TableRow(
-                                                          decoration: pw.BoxDecoration(
-                                                            border: pw.TableBorder.all(
-                                                                width: 1,
-                                                                color: PdfColor.fromHex('000000')
-                                                            ),
-                                                          ),
-                                                          children: [
-                                                            normalText(
-                                                                totalComponents.toString(),myFont
-                                                            ),
-                                                            pw.Container(
-                                                              color: const PdfColor(0.90196,0.90196,0.90196),
-                                                              child: normalText(
-                                                                  'صافي القطع غيار',myFont
-                                                              ),
-                                                            ),
-                                                          ]
-                                                      ),
-                                                    ]
+                                                  ),
+                                                ]
+                                            ),
+                                            if(components.length+additions.length > 0) ... [
+                                              pw.SizedBox(
+                                                height: 5,
+                                              ),
+                                              pw.Center(
+                                                child: boldText(
+                                                    'قطع غيار + اعمال خارجية',myFont
                                                 ),
                                               ),
-                                              pw.Expanded(
-                                                child: pw.SizedBox(),
+                                              pw.SizedBox(
+                                                height: 5,
                                               ),
-                                              pw.Expanded(
-                                                child: pw.Table(
-                                                    border: pw.TableBorder.all(
-                                                        width: 1,
-                                                        color: PdfColor.fromHex('000000')
-                                                    ),
-                                                    children: [
-                                                      pw.TableRow(
-                                                          decoration: pw.BoxDecoration(
-                                                            border: pw.TableBorder.all(
-                                                                width: 1,
-                                                                color: PdfColor.fromHex('000000')
-                                                            ),
-                                                          ),
-                                                          children: [
-                                                            normalText(
-                                                                (widget.visit.discount!+widget.visit.priceAfterDiscount!).toString(),myFont
-                                                            ),
-                                                            pw.Container(
-                                                              child: normalText(
-                                                                  'الاجمالي',myFont
-                                                              ),
-                                                            ),
-                                                          ]
-                                                      ),
-                                                      pw.TableRow(
-                                                          decoration: pw.BoxDecoration(
-                                                            border: pw.TableBorder.all(
-                                                                width: 1,
-                                                                color: PdfColor.fromHex('000000')
-                                                            ),
-                                                          ),
-                                                          children: [
-                                                            normalText(
-                                                                (widget.visit.priceAfterDiscount!).toString(),myFont
-                                                            ),
-                                                            pw.Container(
-                                                              child: normalText(
-                                                                  'الاجمالي بعد الخصم',myFont
-                                                              ),
-                                                            ),
-                                                          ]
-                                                      ),
-                                                      pw.TableRow(
-                                                          decoration: pw.BoxDecoration(
-                                                            border: pw.TableBorder.all(
-                                                                width: 1,
-                                                                color: PdfColor.fromHex('ffffff')
-                                                            ),
-                                                          ),
-                                                          children: [
-                                                            normalText(
-                                                                widget.visit.discount.toString(),myFont
-                                                            ),
-                                                            pw.Container(
-                                                              color: const PdfColor(0.90196,0.90196,0.90196),
-                                                              child: normalText(
-                                                                  'خصم',myFont
-                                                              ),
-                                                            ),
-                                                          ]
-                                                      ),
-                                                      pw.TableRow(
-                                                          decoration: pw.BoxDecoration(
-                                                            border: pw.TableBorder.all(
-                                                                width: 1,
-                                                                color: PdfColor.fromHex('ffffff')
-                                                            ),
-                                                          ),
-                                                          children: [
-                                                            normalText(
-                                                                'نقدي',myFont
-                                                            ),
-                                                            normalText(
-                                                                'دفعات سابقة',myFont
-                                                            ),
-                                                          ]
-                                                      ),
-                                                      pw.TableRow(
-                                                          decoration: pw.BoxDecoration(
-                                                            border: pw.TableBorder.all(
-                                                                width: 1,
-                                                                color: PdfColor.fromHex('000000')
-                                                            ),
-                                                            color: const PdfColor(0.90196,0.90196,0.90196),
-                                                          ),
-                                                          children: [
-                                                            normalText(
-                                                                widget.visit.priceAfterDiscount.toString(),myFont
-                                                            ),
-                                                            normalText(
-                                                                '0',myFont
-                                                            ),
-                                                          ]
-                                                      ),
-                                                    ]
-                                                ),
-                                              ),
-                                            ]
-                                          ),
-                                          pw.SizedBox(
-                                            height: 10,
-                                          ),
-                                          pw.Container(
-                                            width: double.infinity,
-                                            height: 50,
-                                            color: const PdfColor(0.90196,0.90196,0.90196),
-                                            child: pw.Row(
-                                              mainAxisSize: pw.MainAxisSize.max,
-                                              children: [
-                                                pw.Expanded(
-                                                  child: pw.Container(
-                                                    height: 50,
-                                                    decoration: pw.BoxDecoration(
-                                                      border: pw.TableBorder.all(
-                                                          width: 1,
-                                                          color: PdfColor.fromHex('000000')
-                                                      ),
-                                                      color: const PdfColor(1,1,1),
-                                                    ),
-                                                  )
-                                                ),
-                                                boldText('اعمال هامة لم تتم بالسيارة', myFont),
-                                              ]
-                                            )
-                                          ),
-                                          pw.Row(
-                                              mainAxisSize: pw.MainAxisSize.max,
-                                              mainAxisAlignment: pw.MainAxisAlignment.end,
-                                              children: [
-                                                pw.Padding(
-                                                  padding: const pw.EdgeInsets.symmetric(horizontal: 10,vertical: 25),
-                                                  child: pw.Column(
-                                                    crossAxisAlignment: pw.CrossAxisAlignment.center,
-                                                    children: [
-                                                      boldText('توقيع العميل', myFont),
-                                                      normalText('.........................................' , myFont)
-                                                    ]
-                                                  )
-                                                )
-                                              ]
-                                          ),
-                                          pw.Row(
-                                              mainAxisSize: pw.MainAxisSize.max,
-                                              mainAxisAlignment: pw.MainAxisAlignment.start,
-                                              children: [
-                                                pw.Column(
-                                                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                              pw.Table(
+                                                  border: pw.TableBorder.all(
+                                                      width: 1,
+                                                      color: PdfColor.fromHex('000000')
+                                                  ),
                                                   children: [
-                                                    pw.Row(
-                                                        mainAxisAlignment: pw.MainAxisAlignment.start,
+                                                    pw.TableRow(
+                                                        decoration: pw.BoxDecoration(
+                                                          border: pw.TableBorder.all(
+                                                              width: 1,
+                                                              color: PdfColor.fromHex('000000')
+                                                          ),
+                                                          color: const PdfColor(0.90196,0.90196,0.90196),
+                                                        ),
                                                         children: [
-                                                          boldText('Email: ', myFont),
-                                                          normalText('fixerservicecenter@gmail.com' , myFont)
+                                                          normalText(
+                                                              'القيمة',myFont
+                                                          ),
+                                                          normalText(
+                                                              'السعر',myFont
+                                                          ),
+                                                          normalText(
+                                                              'الكمية',myFont
+                                                          ),
+                                                          normalText(
+                                                              'اسم الصنف',myFont
+                                                          ),
                                                         ]
                                                     ),
-                                                    pw.Row(
-                                                        mainAxisAlignment: pw.MainAxisAlignment.start,
-                                                        children: [
-                                                          boldText('Address: ', myFont),
-                                                          normalText('117 St. Teraat Al Gabal - Hadaik el Quiba' , myFont)
-                                                        ]
-                                                    ),
+                                                    for(int i=0; i<components.length; i++)...[
+                                                      pw.TableRow(
+                                                          decoration: pw.BoxDecoration(
+                                                              border: pw.TableBorder.all(
+                                                                  width: 1,
+                                                                  color: PdfColor.fromHex('000000')
+                                                              )
+                                                          ),
+                                                          children: [
+                                                            normalText(
+                                                                (components[i].price!*components[i].quantity!).toString(),myFont
+                                                            ),
+                                                            normalText(
+                                                                components[i].price.toString(),myFont
+                                                            ),
+                                                            normalText(
+                                                                components[i].quantity.toString(),myFont
+                                                            ),
+                                                            normalText(
+                                                                components[i].name!,myFont
+                                                            ),
+                                                          ]
+                                                      ),
+                                                    ],
+                                                    for(int i=0; i<additions.length; i++)...[
+                                                      pw.TableRow(
+                                                          decoration: pw.BoxDecoration(
+                                                              border: pw.TableBorder.all(
+                                                                  width: 1,
+                                                                  color: PdfColor.fromHex('000000')
+                                                              )
+                                                          ),
+                                                          children: [
+                                                            normalText(
+                                                                additions[i].price!.toString(),myFont
+                                                            ),
+                                                            normalText(
+                                                                additions[i].price.toString(),myFont
+                                                            ),
+                                                            normalText(
+                                                                '1',myFont
+                                                            ),
+                                                            normalText(
+                                                                additions[i].name!,myFont
+                                                            ),
+                                                          ]
+                                                      ),
+                                                    ],
                                                   ]
+                                              ),
+                                            ],
+                                            if(services.isNotEmpty) ... [
+                                              pw.SizedBox(
+                                                height: 5,
+                                              ),
+                                              pw.Center(
+                                                child: boldText(
+                                                    'مصنعات',myFont
                                                 ),
-                                              ]
-                                          )
-                                        ]
-                                    )
-                                )
-                            )
-                          ]
-                      )
-                  )
-              ); // Center
-            }));
+                                              ),
+                                              pw.SizedBox(
+                                                height: 5,
+                                              ),
+                                              pw.Table(
+                                                  border: pw.TableBorder.all(
+                                                      width: 1,
+                                                      color: PdfColor.fromHex('000000')
+                                                  ),
+                                                  children: [
+                                                    pw.TableRow(
+                                                        decoration: pw.BoxDecoration(
+                                                          border: pw.TableBorder.all(
+                                                              width: 1,
+                                                              color: PdfColor.fromHex('000000')
+                                                          ),
+                                                          color: const PdfColor(0.90196,0.90196,0.90196),
+                                                        ),
+                                                        children: [
+                                                          normalText(
+                                                              'القيمة',myFont
+                                                          ),
+                                                          normalText(
+                                                              'السعر',myFont
+                                                          ),
+                                                          normalText(
+                                                              'الكمية',myFont
+                                                          ),
+                                                          normalText(
+                                                              'اسم الصنف',myFont
+                                                          ),
+                                                        ]
+                                                    ),
+                                                    for(int i=0; i<services.length; i++)...[
+                                                      pw.TableRow(
+                                                          decoration: pw.BoxDecoration(
+                                                              border: pw.TableBorder.all(
+                                                                  width: 1,
+                                                                  color: PdfColor.fromHex('000000')
+                                                              )
+                                                          ),
+                                                          children: [
+                                                            normalText(
+                                                                services[i].price!.toString(),myFont
+                                                            ),
+                                                            normalText(
+                                                                services[i].price.toString(),myFont
+                                                            ),
+                                                            normalText(
+                                                                '1',myFont
+                                                            ),
+                                                            normalText(
+                                                                services[i].name!,myFont
+                                                            ),
+                                                          ]
+                                                      ),
+                                                    ],
+                                                  ]
+                                              ),
+                                            ],
+                                            pw.Expanded(
+                                              child: pw.SizedBox(),
+                                            ),
+                                            pw.Row(
+                                                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                                mainAxisSize: pw.MainAxisSize.max,
+                                                children: [
+                                                  pw.Expanded(
+                                                    child: pw.Table(
+                                                        border: pw.TableBorder.all(
+                                                            width: 1,
+                                                            color: PdfColor.fromHex('000000')
+                                                        ),
+                                                        children: [
+                                                          pw.TableRow(
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('000000')
+                                                                ),
+                                                              ),
+                                                              children: [
+                                                                normalText(
+                                                                    totalServices.toString(),myFont
+                                                                ),
+                                                                pw.Container(
+                                                                  color: const PdfColor(0.90196,0.90196,0.90196),
+                                                                  child: normalText(
+                                                                      'صافي المصنعات',myFont
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('000000')
+                                                                ),
+                                                              ),
+                                                              children: [
+                                                                normalText(
+                                                                    (totalServices-widget.visit.discount!).toString(),myFont
+                                                                ),
+                                                                pw.Container(
+                                                                  color: const PdfColor(0.90196,0.90196,0.90196),
+                                                                  child: normalText(
+                                                                      'صافي المصنعات بعد الخصم',myFont
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('000000')
+                                                                ),
+                                                              ),
+                                                              children: [
+                                                                normalText(
+                                                                    totalComponents.toString(),myFont
+                                                                ),
+                                                                pw.Container(
+                                                                  color: const PdfColor(0.90196,0.90196,0.90196),
+                                                                  child: normalText(
+                                                                      'صافي قطع الغيار',myFont
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                          ),
+                                                        ]
+                                                    ),
+                                                  ),
+                                                  pw.Expanded(
+                                                    child: pw.SizedBox(),
+                                                  ),
+                                                  pw.Expanded(
+                                                    child: pw.Table(
+                                                        border: pw.TableBorder.all(
+                                                            width: 1,
+                                                            color: PdfColor.fromHex('000000')
+                                                        ),
+                                                        children: [
+                                                          pw.TableRow(
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('000000')
+                                                                ),
+                                                              ),
+                                                              children: [
+                                                                normalText(
+                                                                    (widget.visit.discount!+widget.visit.priceAfterDiscount!).toString(),myFont
+                                                                ),
+                                                                pw.Container(
+                                                                  child: normalText(
+                                                                      'الاجمالي',myFont
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('000000')
+                                                                ),
+                                                              ),
+                                                              children: [
+                                                                normalText(
+                                                                    (widget.visit.priceAfterDiscount!).toString(),myFont
+                                                                ),
+                                                                pw.Container(
+                                                                  child: normalText(
+                                                                      'الاجمالي بعد الخصم',myFont
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('ffffff')
+                                                                ),
+                                                              ),
+                                                              children: [
+                                                                normalText(
+                                                                    widget.visit.discount.toString(),myFont
+                                                                ),
+                                                                pw.Container(
+                                                                  color: const PdfColor(0.90196,0.90196,0.90196),
+                                                                  child: normalText(
+                                                                      'خصم',myFont
+                                                                  ),
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('ffffff')
+                                                                ),
+                                                              ),
+                                                              children: [
+                                                                normalText(
+                                                                    'نقدي',myFont
+                                                                ),
+                                                                normalText(
+                                                                    'دفعات سابقة',myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                          pw.TableRow(
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('000000')
+                                                                ),
+                                                                color: const PdfColor(0.90196,0.90196,0.90196),
+                                                              ),
+                                                              children: [
+                                                                normalText(
+                                                                    widget.visit.priceAfterDiscount.toString(),myFont
+                                                                ),
+                                                                normalText(
+                                                                    '0',myFont
+                                                                ),
+                                                              ]
+                                                          ),
+                                                        ]
+                                                    ),
+                                                  ),
+                                                ]
+                                            ),
+                                            pw.SizedBox(
+                                              height: 10,
+                                            ),
+                                            pw.Container(
+                                                width: double.infinity,
+                                                height: 50,
+                                                color: const PdfColor(0.90196,0.90196,0.90196),
+                                                child: pw.Row(
+                                                    mainAxisSize: pw.MainAxisSize.max,
+                                                    children: [
+                                                      pw.Expanded(
+                                                          child: pw.Container(
+                                                              height: 50,
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('000000')
+                                                                ),
+                                                                color: const PdfColor(1,1,1),
+                                                              ),
+                                                              child: normalText(widget.visit.note1??'' , myFont,)
+                                                          )
+                                                      ),
+                                                      boldText('اعمال هامة لم تتم بالسيارة', myFont),
+                                                    ]
+                                                )
+                                            ),
+                                            pw.Container(
+                                                width: double.infinity,
+                                                height: 50,
+                                                color: const PdfColor(0.90196,0.90196,0.90196),
+                                                child: pw.Row(
+                                                    mainAxisSize: pw.MainAxisSize.max,
+                                                    children: [
+                                                      pw.Expanded(
+                                                          child: pw.Container(
+                                                              height: 50,
+                                                              decoration: pw.BoxDecoration(
+                                                                border: pw.TableBorder.all(
+                                                                    width: 1,
+                                                                    color: PdfColor.fromHex('000000')
+                                                                ),
+                                                                color: const PdfColor(1,1,1),
+                                                              ),
+                                                              child: normalText(widget.visit.note2??'' , myFont)
+                                                          )
+                                                      ),
+                                                      boldText('ملاحظات هامة', myFont),
+                                                    ]
+                                                )
+                                            ),
+                                            pw.Row(
+                                                mainAxisSize: pw.MainAxisSize.max,
+                                                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  pw.Padding(
+                                                    padding: const pw.EdgeInsets.only(left: 10,right: 10,top: 10),
+                                                    child: pw.Column(
+                                                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                                                        children: [
+                                                          pw.Row(
+                                                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                                                              children: [
+                                                                boldText('Email: ', myFont),
+                                                                normalText('fixerservicecenter@gmail.com' , myFont)
+                                                              ]
+                                                          ),
+                                                          pw.Row(
+                                                              mainAxisAlignment: pw.MainAxisAlignment.start,
+                                                              children: [
+                                                                boldText('Address: ', myFont),
+                                                                normalText('117 St. Teraat Al Gabal - Hadaik el Quiba' , myFont)
+                                                              ]
+                                                          ),
+                                                        ]
+                                                    ),
+                                                  ),
+                                                  pw.Padding(
+                                                      padding: const pw.EdgeInsets.only(left: 10,right: 10,top: 10),
+                                                      child: pw.Column(
+                                                          crossAxisAlignment: pw.CrossAxisAlignment.center,
+                                                          children: [
+                                                            boldText('توقيع العميل', myFont),
+                                                            normalText('.........................................' , myFont)
+                                                          ]
+                                                      )
+                                                  ),
+                                                ]
+                                            ),
+                                          ]
+                                      )
+                                  )
+                              )
+                            ]
+                        )
+                    )
+                ); // Center
+              }));
+          currentIndex = endIndex;
+        }
 
         pdf.save().then((value) {
           pdfBytes = value;
@@ -1101,7 +1165,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                               padding:
                                   const EdgeInsetsDirectional.fromSTEB(4, 0, 16, 0),
                               child: Text(
-                                '#${widget.visit.id}',
+                                '#${widget.visit.invoiceID}',
 
                                 textAlign: TextAlign.end,
                                 style: FlutterFlowTheme.of(context)
@@ -1166,7 +1230,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16, 0, 16, 0),
                                 child: Image.asset(
-                                  'assets/images/41723171321.png',
+                                  Assets.imagesWhiteTeslaCar,
                                   width: double.infinity,
                                   height: 210,
                                   fit: BoxFit.cover,
@@ -1184,25 +1248,71 @@ class _ServicesDetailsState extends State<ServicesDetails>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Car Number: ${widget.visit.carNumber}",
-                            style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                "${'Car Plate'.tr()}: ",
+                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
+                              ),
+                              Text(
+                                "${widget.visit.carNumber}",
+                                style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                            "Service Type: ${widget.visit.type}",
-                            style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                "${'Service Type'.tr()}: ",
+                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
+                              ),
+                              Text(
+                                "${widget.visit.type}",
+                                style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 8),
-                          Text(
-                            "Expected Date: ${widget.visit.expectedDate?.day}/${widget.visit.expectedDate?.month}/${widget.visit.expectedDate?.year}",
-                            style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          if(widget.visit.distance!=null)const SizedBox(height: 8),
+                          if(widget.visit.distance!=null)Row(
+                            children: [
+                              Text(
+                                "${'Distance'.tr()}: ",
+                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
+                              ),
+                              Text(
+                                "${widget.visit.distance} ${'Km'.tr()}",
+                                style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            "Services:",
+                          if(!(widget.visit.complete??false))const SizedBox(height: 8),
+                          if(!(widget.visit.complete??false))Row(
+                            children: [
+                              Text(
+                                "${'Expected Completion Date'.tr()}: ",
+                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
+                              ),
+                              Text(
+                                "${widget.visit.expectedDate?.day}/${widget.visit.expectedDate?.month}/${widget.visit.expectedDate?.year}",
+                                style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 16,
+                            child: Center(
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.96,
+                                height: 1,
+                                color: Colors.grey.withOpacity(0.7),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "${'Labour'.tr()}:",
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                           ),
                           const SizedBox(height: 8),
                           Column(
@@ -1212,31 +1322,49 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                   padding: const EdgeInsets.only(bottom: 5.0),
                                   child: Text(service.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                                 ),
-                                subtitle: Text("${service.price} EGP",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
+                                subtitle: Text("${service.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
                                 trailing: Text(service.state!,style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: service.state! == 'repairing'?const Color(0xFFF68B1E):FlutterFlowTheme.of(context).success),),
                               );
                             }).toList(),
                           ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            "Additions:",
+                          SizedBox(
+                            height: 16,
+                            child: Center(
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.96,
+                                height: 1,
+                                color: Colors.grey.withOpacity(0.7),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "${'Additions'.tr()}:",
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                           ),
                           const SizedBox(height: 8),
                           Column(
                             children: widget.visit.additions.map((addition) {
                               return ListTile(
                                 title: Text(addition.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                                subtitle: Text("${addition.price} EGP",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
+                                subtitle: Text("${addition.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
                               );
                             }).toList(),
                           ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            "Components:",
+                          SizedBox(
+                            height: 16,
+                            child: Center(
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.96,
+                                height: 1,
+                                color: Colors.grey.withOpacity(0.7),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            "${'Spare Parts'.tr()}:",
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                           ),
                           const SizedBox(height: 8),
                           Column(
@@ -1244,21 +1372,46 @@ class _ServicesDetailsState extends State<ServicesDetails>
                               return ListTile(
                                 title: Text(component.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                                 subtitle: Text(
-                                    "${component.price} EGP",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
+                                    "${component.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
                                 trailing: Text(
                                   "x ${component.quantity}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Color(0xFFF68B1E)),),
                               );
                             }).toList(),
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            "Price After Discount: ${widget.visit.priceAfterDiscount} EGP",
-                            style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          SizedBox(
+                            height: 16,
+                            child: Center(
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.96,
+                                height: 1,
+                                color: Colors.grey.withOpacity(0.7),
+                              ),
+                            ),
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            "Completion Ratio: ${widget.visit.completedServicesRatio} %",
-                            style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                          Row(
+                            children: [
+                              Text(
+                                "${'Price After Discount'.tr()}: ",
+                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
+                              ),
+                              Text(
+                                "${widget.visit.priceAfterDiscount} ${'EGP'.tr()}",
+                                style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Text(
+                                "${'Completion Ratio'.tr()}: ",
+                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
+                              ),
+                              Text(
+                                "${widget.visit.completedServicesRatio} %",
+                                style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
+                              ),
+                            ],
                           ),
                           /*SizedBox(height: 16),
                           Text(
@@ -1306,7 +1459,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                     size: 30,
                   ):
                   Text(
-                    'Bill',
+                    'Bill'.tr(),
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Outfit',

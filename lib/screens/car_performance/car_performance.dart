@@ -79,7 +79,7 @@ class _CarPerformanceState extends State<CarPerformance> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Expanded(
+              /*Expanded(
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                   child: GridView(
@@ -575,7 +575,7 @@ class _CarPerformanceState extends State<CarPerformance> {
                     ],
                   ),
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

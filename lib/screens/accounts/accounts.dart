@@ -1,10 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
+import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/screens/layout/layout.dart';
 import 'package:fixer_app/screens/login/login.dart';
 import 'package:fixer_app/shared/components.dart';
-/*import 'package:fixer_app/variables/language/language.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -13,9 +14,6 @@ import 'package:flutter/services.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-/*import 'dart:ui' as ui;*/
-
-
 
 class Accounts extends StatefulWidget {
   final Map<String, List<String>> savedAccounts;
@@ -53,13 +51,13 @@ class _LoginStateState extends State<Accounts> {
               MaterialPageRoute(
                 builder: (context) => const Layout(),
               ));
-          showToast('Login Successfully');
+          showToast('Login Successfully'.tr());
         }
 
         else if (state is AppLoginErrorState)
         {
           //print(state.error);
-          showToast('Failed to Login');
+          showToast('Failed to Login'.tr());
         }
 
       },
@@ -75,7 +73,7 @@ class _LoginStateState extends State<Accounts> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: Image.asset(
-                  'assets/images/34193997432.png',
+                  Assets.imagesBackgroundGarage,
                 ).image,
               ),
             ),
@@ -98,12 +96,12 @@ class _LoginStateState extends State<Accounts> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Image.asset(
-                              'assets/images/logo.png',
+                              Assets.imagesLogo,
                               width: 160,
-                              height: 90,
+                              height: 100,
                               fit: BoxFit.fitWidth,
                             ),
-                            /*Padding(
+                            Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -111,28 +109,17 @@ class _LoginStateState extends State<Accounts> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () {
-                                  setState(() {
-                                    engApp = !engApp;
-                                  });
+                                  context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
                                 },
-                                child: engApp
-                                    ? Text(
-                                  "E",
+                                child: Text(
+                                  'E'.tr(),
                                   style: TextStyle(
                                     color: Color(0xFF95A1AC),
                                     fontSize: 20,
                                   ),
-                                )
-                                    : Text(
-                                  "ع",
-                                  style: TextStyle(
-                                    color: Color(0xFF95A1AC),
-                                    fontSize: 20,
-                                  ),
-                                  textDirection: ui.TextDirection.rtl,
                                 ),
                               ),
-                            )*/
+                            )
                           ],
                         ),
                       ),
@@ -140,7 +127,7 @@ class _LoginStateState extends State<Accounts> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Welcome!',
+                            'Welcome!'.tr(),
                             style: FlutterFlowTheme.of(context)
                                 .displaySmall
                                 .override(
@@ -159,7 +146,7 @@ class _LoginStateState extends State<Accounts> {
                               padding:
                               const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 24),
                               child: Text(
-                                'To the future of car service',
+                                'To the future of car service'.tr(),
                                 style: FlutterFlowTheme.of(context)
                                     .headlineSmall
                                     .override(
@@ -183,7 +170,7 @@ class _LoginStateState extends State<Accounts> {
                                 padding:
                                 const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 24),
                                 child: Text(
-                                  'Your saved accounts',
+                                  'Your saved accounts'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .headlineSmall
                                       .override(
@@ -272,7 +259,7 @@ class _LoginStateState extends State<Accounts> {
                                                       .fromSTEB(
                                                       0, 4, 0, 0),
                                                   child: Text(
-                                                    "code: ${widget.savedAccounts['codes']![i]}",
+                                                    "${'Code'.tr()}: ${widget.savedAccounts['codes']![i]}",
                                                     style: FlutterFlowTheme
                                                         .of(context)
                                                         .titleSmall,
@@ -284,7 +271,7 @@ class _LoginStateState extends State<Accounts> {
                                                       .fromSTEB(
                                                       0, 4, 0, 0),
                                                   child: Text(
-                                                    "password: ${widget.savedAccounts['passwords']![i]}",
+                                                    "${'Password'.tr()}: ${widget.savedAccounts['passwords']![i]}",
                                                     style: FlutterFlowTheme
                                                         .of(context)
                                                         .titleSmall,
@@ -304,7 +291,7 @@ class _LoginStateState extends State<Accounts> {
                                             topRight: Radius.circular(0),
                                           ),
                                           child: Image.asset(
-                                            'assets/images/41723171321.png',
+                                            Assets.imagesWhiteTeslaCar,
                                             width:
                                             MediaQuery.sizeOf(context)
                                                 .width *
@@ -333,7 +320,7 @@ class _LoginStateState extends State<Accounts> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Don\'t have an account?',
+                                  'Don\'t have an account?'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -344,7 +331,7 @@ class _LoginStateState extends State<Accounts> {
                                   ),
                                 ),
                                 Text(
-                                  'Visit our center to create \nan account',
+                                  'Visit our center to create \nan account'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
@@ -384,7 +371,7 @@ class _LoginStateState extends State<Accounts> {
                                       // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Layout(),));
                                     }
                                   },
-                                  text: 'Login',
+                                  text: 'Login'.tr(),
                                   options: FFButtonOptions(
                                     width: MediaQuery.sizeOf(context).width * 0.35,
                                     height: MediaQuery.sizeOf(context).height * 0.065,
@@ -439,7 +426,7 @@ class _LoginStateState extends State<Accounts> {
                                                 builder: (context) =>Login(savedAccounts: widget.savedAccounts,),
                                               ));
                                         },
-                                        text: 'Login with new account?',
+                                        text: 'Login with new account?'.tr(),
                                         options: FFButtonOptions(
                                           width: 200,
                                           height: 30,
@@ -467,7 +454,7 @@ class _LoginStateState extends State<Accounts> {
                                       ),
                                     ),
                                     AutoSizeText(
-                                      'Visit our Social Pages',
+                                      'Visit our Social Pages'.tr(),
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.getFont(
                                         'Lexend Deca',
@@ -505,7 +492,7 @@ class _LoginStateState extends State<Accounts> {
                                                   BorderRadius.circular(50),
                                                 ),
                                                 child: Image.asset(
-                                                  'assets/images/instagram.png',
+                                                  Assets.imagesInstagram,
                                                   width: 50,
                                                   height: 50,
                                                   fit: BoxFit.cover,
@@ -534,7 +521,7 @@ class _LoginStateState extends State<Accounts> {
                                                   BorderRadius.circular(50),
                                                 ),
                                                 child: Image.asset(
-                                                  'assets/images/facebook.png',
+                                                  Assets.imagesFacebook,
                                                   width: 50,
                                                   height: 50,
                                                   fit: BoxFit.cover,
@@ -563,7 +550,7 @@ class _LoginStateState extends State<Accounts> {
                                                   BorderRadius.circular(50),
                                                 ),
                                                 child: Image.asset(
-                                                  'assets/images/whatsapp.png',
+                                                  Assets.imagesWhatsapp,
                                                   width: 50,
                                                   height: 50,
                                                   fit: BoxFit.cover,
@@ -588,7 +575,7 @@ class _LoginStateState extends State<Accounts> {
                                                 BorderRadius.circular(50),
                                               ),
                                               child: Image.asset(
-                                                'assets/images/telephone.png',
+                                                Assets.imagesTelephone,
                                                 width: 50,
                                                 height: 50,
                                                 fit: BoxFit.cover,

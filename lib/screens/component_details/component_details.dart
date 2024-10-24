@@ -80,7 +80,7 @@ class _ComponentDetailsState extends State<ComponentDetails> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Align(
+                /*Align(
                   alignment: const AlignmentDirectional(0, -1),
                   child: Container(
                     width: 200,
@@ -106,7 +106,7 @@ class _ComponentDetailsState extends State<ComponentDetails> {
                       ),
                     ),
                   ),
-                ),
+                ),*/
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Text(

@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/shared/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -80,7 +81,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
               ),
               title: Text(
-                'Forgot Password',
+                'Forgot Password'.tr(),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Lexend Deca',
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -105,9 +106,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       textInputAction: TextInputAction.next,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Your Code...',
+                        labelText: 'Your Code...'.tr(),
                         labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                        hintText: 'Enter your code here...',
+                        hintText: 'Enter your code here...'.tr(),
                         hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -145,7 +146,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       validator: (value) {
                         if (value == null ||value.isEmpty)
                         {
-                          return "Enter car code";
+                          return "Enter car code".tr();
                         }
                         return null;
                       },
@@ -158,7 +159,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          'Car ID',
+                          'Car Plate'.tr(),
                           style: FlutterFlowTheme.of(context).bodyLarge,
                         ),
                       ],
@@ -175,9 +176,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             textInputAction: TextInputAction.next,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Characters',
+                              labelText: 'Characters'.tr(),
                               labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                              hintText: 'Enter characters here...',
+                              hintText: 'Enter characters here...'.tr(),
                               hintStyle: FlutterFlowTheme.of(context).bodySmall,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -216,7 +217,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             validator: (value) {
                               if (value == null ||value.isEmpty)
                                 {
-                                  return "Enter car ID characters";
+                                  return "Enter car plate characters".tr();
                                 }
                               return null;
                             },
@@ -230,9 +231,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             textInputAction: TextInputAction.done,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Numbers',
+                              labelText: 'Numbers'.tr(),
                               labelStyle: FlutterFlowTheme.of(context).bodySmall,
-                              hintText: 'Enter numbers here...',
+                              hintText: 'Enter numbers here...'.tr(),
                               hintStyle: FlutterFlowTheme.of(context).bodySmall,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -272,7 +273,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             validator: (value) {
                               if (value == null ||value.isEmpty)
                               {
-                                return "Enter car ID number";
+                                return "Enter car plate number".tr();
                               }
                               return null;
                             },
@@ -289,7 +290,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       children: [
                         Expanded(
                           child: Text(
-                            'We will send you an email with a link to reset your password, please enter the email associated with your account above.',
+                            'We will send you your password using email.'.tr(),
                             style: FlutterFlowTheme.of(context).bodySmall,
                           ),
                         ),
@@ -311,7 +312,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               }
 
                             },
-                            text: 'Send New Password',
+                            text: 'Send You Your Password'.tr(),
                             options: FFButtonOptions(
                               width: 230,
                               height: 50,

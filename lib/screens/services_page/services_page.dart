@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
 import 'package:fixer_app/generated/assets.dart';
@@ -174,7 +175,7 @@ class _ServicesPageState extends State<ServicesPage>
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               automaticallyImplyLeading: false,
               title: Text(
-                'Service Appointments',
+                'My Service'.tr(),
                 style: FlutterFlowTheme.of(context).headlineMedium,
               ),
               actions: const [],
@@ -204,7 +205,7 @@ class _ServicesPageState extends State<ServicesPage>
                           padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 16),
                           child: Builder(
                             builder: (context) {
-                              return AppCubit.get(context).getServicesModel!.visits.isEmpty ? const Center(
+                              return AppCubit.get(context).getServicesModel!.visits.isEmpty ? Center(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -212,9 +213,10 @@ class _ServicesPageState extends State<ServicesPage>
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.symmetric(vertical: 32),
-                                      child: Image(image: AssetImage(Assets.imagesAutoMechanicRepairingVehicleEngineIsolatedFlatVectorIllustrationCartoonManFixingCheckingCarWithOpenHoodGarage),),
+                                      child: Image(image: AssetImage(Assets.imagesNoServices),),
                                     ),
-                                    Text('No Services Found',
+                                    Text(
+                                      'No Services Found'.tr(),
                                       style: TextStyle(
                                           color: Color(0xFFF68B1E),
                                           fontSize: 50,

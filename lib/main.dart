@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
 import 'package:fixer_app/screens/accounts/accounts.dart';
@@ -7,7 +8,10 @@ import 'package:fixer_app/screens/login/login.dart';
 import 'package:fixer_app/screens/new_update.dart';
 import 'package:fixer_app/screens/onboarding/onboarding.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:fixer_app/shared/codegen_loader.g.dart';
+import 'package:fixer_app/shared/constant_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
@@ -29,7 +33,27 @@ void main() async {
    'carsInfo':savedCarsInfo,
   };
 
-  runApp( MyApp(onBoarding, savedAccounts));
+  SystemChrome.setPreferredOrientations(<DeviceOrientation>[
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) async {
+    runApp(EasyLocalization(
+        path: 'assets/translations',
+        supportedLocales: const [
+          Locale('en'),
+          Locale('ar'),
+        ],
+        fallbackLocale: Locale(ConstantData.kDefaultLung),
+        startLocale: Locale(CacheHelper.getData(ConstantData.kLung)??ConstantData.kDefaultLung),
+        assetLoader: const CodegenLoader(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider (create: (BuildContext context) => AppCubit(),),
+          ],
+          child: MyApp(onBoarding, savedAccounts),)));
+  });
+
+  //runApp( MyApp(onBoarding, savedAccounts));
 }
 
 class MyApp extends StatefulWidget {
@@ -49,15 +73,14 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     get(Uri.parse('https://fixer-backend-rtw4.onrender.com/api/V1/appVersion')).then((value) {
       setState(() {
-        updatedApp = json.decode(value.body)[0]['version'].toString() == "1.2.0";
+        updatedApp = json.decode(value.body)[0]['version'].toString() == "1.3.0";
       });
     },);
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => AppCubit(),
-    child: BlocConsumer<AppCubit,AppCubitStates>(
+    return BlocConsumer<AppCubit,AppCubitStates>(
       listener: (BuildContext context, AppCubitStates state) {  },
       builder: (context, state) {
         return AdaptiveTheme(
@@ -81,6 +104,9 @@ class _MyAppState extends State<MyApp> {
             theme: theme,
             darkTheme: darkTheme,
             debugShowCheckedModeBanner: false,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
             home: updatedApp == null ? const Center(
               child: SizedBox(
                 width: 50,
@@ -95,9 +121,6 @@ class _MyAppState extends State<MyApp> {
         );
       },
 
-    )
-
-      ,
     );
 
 

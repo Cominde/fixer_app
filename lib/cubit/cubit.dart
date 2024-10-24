@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/states.dart';
 import 'package:fixer_app/models/forget_password_model.dart';
 import 'package:fixer_app/models/get_home_prams_model.dart';
 import 'package:fixer_app/models/login_by_code_model.dart';
 import 'package:fixer_app/network/local/cache_helper.dart';
 import 'package:fixer_app/shared/components.dart';
+import 'package:fixer_app/shared/constant_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:http/http.dart';
@@ -177,6 +180,13 @@ class AppCubit extends Cubit<AppCubitStates> {
       }
       );
     }
+
+
+  void updateLung({required String lung,required BuildContext context}){
+    context.setLocale( Locale(lung));
+    CacheHelper.putData(key: ConstantData.kLung,value:  lung);
+    emit(UpdateLungState());
+  }
   }
 
 //94162179

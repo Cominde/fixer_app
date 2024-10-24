@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/shared/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class _NewUpdateScreenState extends State<NewUpdateScreen> with TickerProviderSt
                     ],
                   ),
                   child: Text(
-                    'new update',
+                    'New Update'.tr(),
                     style: TextStyle(
                       fontSize: 40,
                       color: const Color(0xFFF68B1E),
@@ -101,13 +102,13 @@ class _NewUpdateScreenState extends State<NewUpdateScreen> with TickerProviderSt
             child: Container(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                 clipBehavior: Clip.antiAlias,
-                child: const Image(image: AssetImage(Assets.images6550082),)
+                child: const Image(image: AssetImage(Assets.imagesNewUpdate),)
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Text(
-              'New Version Available Now',
+              'New Version Available Now'.tr(),
               style: FlutterFlowTheme.of(context).headlineMedium,
             ),
           ),
@@ -135,7 +136,7 @@ class _NewUpdateScreenState extends State<NewUpdateScreen> with TickerProviderSt
                         ],
                       ),
                       child: Text(
-                        'Download New Version',
+                        'Download New Version'.tr(),
                         style: FlutterFlowTheme.of(context)
                             .titleMedium
                             .override(

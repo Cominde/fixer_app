@@ -1,12 +1,13 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
+import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/network/local/cache_helper.dart';
 import 'package:fixer_app/screens/accounts/accounts.dart';
 import 'package:fixer_app/screens/login/login.dart';
 import 'package:fixer_app/screens/my_car/my_car.dart';
 import 'package:fixer_app/screens/my_profile/my_profile.dart';
-/*import 'package:fixer_app/variables/language/language.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -14,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-/*import 'dart:ui' as ui;*/
 
 import 'profile_page_model.dart';
 export 'profile_page_model.dart';
@@ -35,8 +35,6 @@ class _ProfilePageState extends State<ProfilePage>
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var hasContainerTriggered1 = false;
   var hasContainerTriggered2 = false;
-  /*var hasContainerTriggered3 = false;
-  var hasContainerTriggered4 = false;*/
   final animationsMap = {
     'containerOnActionTriggerAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onActionTrigger,
@@ -65,34 +63,6 @@ class _ProfilePageState extends State<ProfilePage>
       ],
     ),
   };
-  /*final animationsMap2 = {
-    'containerOnActionTriggerAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(40, 0),
-          end: Offset(0, 0),
-        ),
-      ],
-    ),
-    'containerOnActionTriggerAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onActionTrigger,
-      applyInitialState: false,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 350.ms,
-          begin: Offset(-40, 0),
-          end: Offset(0, 0),
-        ),
-      ],
-    ),
-  };*/
 
   @override
   void initState() {
@@ -105,13 +75,6 @@ class _ProfilePageState extends State<ProfilePage>
           !anim.applyInitialState),
       this,
     );
-
-    /*setupAnimations(
-      animationsMap2.values.where((anim) =>
-      anim.trigger == AnimationTrigger.onActionTrigger ||
-          !anim.applyInitialState),
-      this,
-    );*/
   }
 
   @override
@@ -186,7 +149,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         shape: BoxShape.circle,
                                       ),
                                       child: Image.asset(
-                                        'assets/images/man.png',
+                                        Assets.imagesProfileAvatar,
                                         fit: BoxFit.fitWidth,
                                       ),
                                     ),
@@ -222,36 +185,25 @@ class _ProfilePageState extends State<ProfilePage>
                                     ),
                                   ),
                                 ),
-                                /*Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () {
-                                      setState(() {
-                                        engApp = !engApp;
-                                      });
+                                      context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
                                     },
-                                    child: engApp
-                                        ? Text(
-                                            "E",
-                                            style: TextStyle(
-                                              color: Color(0xFF95A1AC),
-                                              fontSize: 20,
-                                            ),
-                                          )
-                                        : Text(
-                                            "ع",
-                                            style: TextStyle(
-                                              color: Color(0xFF95A1AC),
-                                              fontSize: 20,
-                                            ),
-                                            textDirection: ui.TextDirection.rtl,
-                                          ),
+                                    child: Text(
+                                      'E'.tr(),
+                                      style: TextStyle(
+                                        color: Color(0xFF95A1AC),
+                                        fontSize: 20,
+                                      ),
+                                    ),
                                   ),
-                                )*/
+                                )
                               ],
                             ),
                           ),
@@ -303,7 +255,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'Switch to Dark Mode',
+                                            'Switch to Dark Mode'.tr(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
@@ -424,7 +376,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'Switch to Light Mode',
+                                            'Switch to Light Mode'.tr(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
@@ -496,210 +448,206 @@ class _ProfilePageState extends State<ProfilePage>
                           ),
                         ),
                         /*Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    if (engApp)
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          setState(() {
-                            engApp = false;
-                          });
-                          if (animationsMap2['containerOnActionTriggerAnimation2'] != null) {
-                            setState(() => hasContainerTriggered4 = true);
-                            animationsMap2['containerOnActionTriggerAnimation2']!.controller.duration = Duration(milliseconds: 350);
-                            SchedulerBinding.instance.addPostFrameCallback(
-                                    (_) async => await animationsMap2['containerOnActionTriggerAnimation2']!.controller.forward(from: 0.0)
-                            );
-                          }
-                        },
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24, 12, 24, 12),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Switch to Arabic',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium,
-                                ),
-                                Container(
-                                  width: 80,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Stack(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    children: [
-                                      Align(
-                                        alignment:
-                                        AlignmentDirectional(0.95, 0),
-                                        child: Padding(
-                                          padding: EdgeInsetsDirectional
-                                              .fromSTEB(0, 0, 12, 5),
-                                          child: Text(
-                                            "ع",
-                                            style: TextStyle(
-                                              color: Color(0xFF95A1AC),
-                                              fontSize: 20,
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              if (CacheHelper.getData(key: ConstantData.kLung) == 'en')
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
+                                    if (animationsMap2['containerOnActionTriggerAnimation2'] != null) {
+                                      setState(() => hasContainerTriggered4 = true);
+                                      animationsMap2['containerOnActionTriggerAnimation2']!.controller.duration = Duration(milliseconds: 350);
+                                      SchedulerBinding.instance.addPostFrameCallback(
+                                              (_) async => await animationsMap2['containerOnActionTriggerAnimation2']!.controller.forward(from: 0.0)
+                                      );
+                                    }
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.sizeOf(context).width,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          24, 12, 24, 12),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Switch to Arabic',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Container(
+                                            width: 80,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                              borderRadius: BorderRadius.circular(20),
                                             ),
-                                            textDirection: ui.TextDirection.rtl,
-                                          ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                        AlignmentDirectional(-0.85, 0),
-                                        child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            color:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 4,
-                                                color: Color(0x430B0D0F),
-                                                offset: Offset(0, 2),
-                                              )
-                                            ],
-                                            borderRadius:
-                                            BorderRadius.circular(30),
-                                            shape: BoxShape.rectangle,
-                                          ),
-                                        ).animateOnActionTrigger(
-                                            animationsMap2[
-                                            'containerOnActionTriggerAnimation1']!,
-                                            hasBeenTriggered:
-                                            hasContainerTriggered3),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (!engApp)
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          setState(() {
-                            engApp = true;
-                          });
-                          if (animationsMap2[
-                          'containerOnActionTriggerAnimation1'] !=
-                              null) {
-                            animationsMap2['containerOnActionTriggerAnimation1']!.controller.duration = Duration(milliseconds: 350);
-                            setState(() => hasContainerTriggered3 = true);
-                            SchedulerBinding.instance.addPostFrameCallback(
-                                    (_) async => await animationsMap2[
-                                'containerOnActionTriggerAnimation1']!
-                                    .controller
-                                    .forward(from: 0.0));
-                          }
-                        },
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).secondaryBackground,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24, 12, 24, 12),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Switch to English',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium,
-                                ),
-                                Container(
-                                  width: 80,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).primaryBackground,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Stack(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    children: [
-                                      Align(
-                                        alignment:
-                                        AlignmentDirectional(-0.9, 0),
-                                        child: Padding(
-                                          padding: EdgeInsetsDirectional
-                                              .fromSTEB(8, 2, 0, 0),
-                                          child: Text(
-                                            "E",
-                                            style: TextStyle(
-                                              color: Color(0xFF95A1AC),
-                                              fontSize: 20,
+                                            child: Stack(
+                                              alignment: AlignmentDirectional(0, 0),
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                  AlignmentDirectional(0.95, 0),
+                                                  child: Padding(
+                                                    padding: EdgeInsetsDirectional
+                                                        .fromSTEB(0, 0, 12, 5),
+                                                    child: Text(
+                                                      "ع",
+                                                      style: TextStyle(
+                                                        color: Color(0xFF95A1AC),
+                                                        fontSize: 20,
+                                                      ),
+                                                      textDirection: ui.TextDirection.rtl,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                  AlignmentDirectional(-0.85, 0),
+                                                  child: Container(
+                                                    width: 36,
+                                                    height: 36,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                      FlutterFlowTheme.of(context)
+                                                          .secondaryBackground,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          blurRadius: 4,
+                                                          color: Color(0x430B0D0F),
+                                                          offset: Offset(0, 2),
+                                                        )
+                                                      ],
+                                                      borderRadius:
+                                                      BorderRadius.circular(30),
+                                                      shape: BoxShape.rectangle,
+                                                    ),
+                                                  ).animateOnActionTrigger(
+                                                      animationsMap2[
+                                                      'containerOnActionTriggerAnimation1']!,
+                                                      hasBeenTriggered:
+                                                      hasContainerTriggered3),
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                      Align(
-                                        alignment:
-                                        AlignmentDirectional(0.9, 0),
-                                        child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context).secondaryBackground,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 4,
-                                                color: Color(0x430B0D0F),
-                                                offset: Offset(0, 2),
-                                              )
-                                            ],
-                                            borderRadius:
-                                            BorderRadius.circular(30),
-                                            shape: BoxShape.rectangle,
-                                          ),
-                                        ).animateOnActionTrigger(
-                                            animationsMap2[
-                                            'containerOnActionTriggerAnimation2']!,
-                                            hasBeenTriggered:
-                                            hasContainerTriggered4),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              if (CacheHelper.getData(key: ConstantData.kLung) != 'en')
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
+                                    if (animationsMap2[
+                                    'containerOnActionTriggerAnimation1'] !=
+                                        null) {
+                                      animationsMap2['containerOnActionTriggerAnimation1']!.controller.duration = Duration(milliseconds: 350);
+                                      setState(() => hasContainerTriggered3 = true);
+                                      SchedulerBinding.instance.addPostFrameCallback(
+                                              (_) async => await animationsMap2[
+                                          'containerOnActionTriggerAnimation1']!
+                                              .controller
+                                              .forward(from: 0.0));
+                                    }
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.sizeOf(context).width,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          24, 12, 24, 12),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Switch to English',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Container(
+                                            width: 80,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: FlutterFlowTheme.of(context).primaryBackground,
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            child: Stack(
+                                              alignment: AlignmentDirectional(0, 0),
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                  AlignmentDirectional(-0.9, 0),
+                                                  child: Padding(
+                                                    padding: EdgeInsetsDirectional
+                                                        .fromSTEB(8, 2, 0, 0),
+                                                    child: Text(
+                                                      "E",
+                                                      style: TextStyle(
+                                                        color: Color(0xFF95A1AC),
+                                                        fontSize: 20,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                  AlignmentDirectional(0.9, 0),
+                                                  child: Container(
+                                                    width: 36,
+                                                    height: 36,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          blurRadius: 4,
+                                                          color: Color(0x430B0D0F),
+                                                          offset: Offset(0, 2),
+                                                        )
+                                                      ],
+                                                      borderRadius:
+                                                      BorderRadius.circular(30),
+                                                      shape: BoxShape.rectangle,
+                                                    ),
+                                                  ).animateOnActionTrigger(
+                                                      animationsMap2[
+                                                      'containerOnActionTriggerAnimation2']!,
+                                                      hasBeenTriggered:
+                                                      hasContainerTriggered4),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),*/
+                        ),*/
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                           child: Row(
@@ -746,7 +694,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'My Car',
+                                            'My Car'.tr(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
@@ -811,7 +759,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'My Profile',
+                                            'My Profile'.tr(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
@@ -853,7 +801,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     builder: (context) => savedAccounts['codes']!.isNotEmpty?Accounts(savedAccounts: savedAccounts,):Login(savedAccounts: savedAccounts,),
                                   ));
                             },
-                            text: 'Log Out',
+                            text: 'Log Out'.tr(),
                             options: FFButtonOptions(
                               width: 110,
                               height: 50,

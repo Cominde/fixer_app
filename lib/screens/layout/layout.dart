@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/screens/home_page/home_page.dart';
 import 'package:fixer_app/screens/profile_page/profile_page.dart';
 import 'package:fixer_app/screens/services_page/services_page.dart';
@@ -75,7 +76,7 @@ class _LayoutState extends State<Layout> {
                     size: 20,
                   ),
                 ),
-                label: 'Home',
+                label: 'Home'.tr(),
                 backgroundColor: Colors.grey.withOpacity(0.4),
                 activeIcon: const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -103,7 +104,7 @@ class _LayoutState extends State<Layout> {
                     size: 20,
                   ),
                 ),
-                label: 'Services',
+                label: 'Services'.tr(),
                 backgroundColor: Colors.grey.withOpacity(0.4),
                 activeIcon: const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -131,7 +132,7 @@ class _LayoutState extends State<Layout> {
                     size: 20,
                   ),
                 ),
-                label: 'Person',
+                label: 'Person'.tr(),
                 backgroundColor: Colors.grey.withOpacity(0.4),
                 activeIcon: const Padding(
                   padding: EdgeInsets.all(8.0),

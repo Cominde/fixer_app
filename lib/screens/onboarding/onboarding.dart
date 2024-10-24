@@ -1,5 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:fixer_app/cubit/cubit.dart';
+import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/network/local/cache_helper.dart';
 import 'package:fixer_app/screens/login/login.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
 as smooth_page_indicator;
@@ -60,46 +64,37 @@ class _OnboardingState extends State<Onboarding> {
               children: [
                 if (!(Theme.of(context).brightness == Brightness.dark))
                   Image.asset(
-                    'assets/images/logo.png',
+                    Assets.imagesLogo,
                     width: MediaQuery.sizeOf(context).width * 0.4,
                     height: MediaQuery.sizeOf(context).height * 0.09,
                     fit: BoxFit.cover,
                   ),
                 if (Theme.of(context).brightness == Brightness.dark)
                   Image.asset(
-                    'assets/images/logo.png',
+                    Assets.imagesLogo,
                     width: 200,
                     height: 50,
                     fit: BoxFit.fitHeight,
                   ),
-                /*Padding(
+                Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: (){
-                      setState(() {
-                        engApp = !engApp;
-                      });
+                    onTap: () {
+                      context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
                     },
-                    child: engApp?const Text(
-                      "E",
+                    child: Text(
+                      'E'.tr(),
                       style: TextStyle(
                         color: Color(0xFF95A1AC),
                         fontSize: 20,
                       ),
-                    ):const Text(
-                      "ع",
-                      style: TextStyle(
-                        color: Color(0xFF95A1AC),
-                        fontSize: 20,
-                      ),
-                      textDirection: ui.TextDirection.rtl,
                     ),
                   ),
-                )*/
+                )
               ],
             ),
           ),
@@ -133,7 +128,7 @@ class _OnboardingState extends State<Onboarding> {
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 0, 20),
                                       child: Image.asset(
-                                        'assets/images/homepage_hero.png',
+                                        Assets.imagesOnboarding1,
                                         width:
                                         MediaQuery.sizeOf(context).width *
                                             0.9,
@@ -153,7 +148,7 @@ class _OnboardingState extends State<Onboarding> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'Add Cars',
+                                          'Fix Your Cars'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium,
@@ -170,7 +165,7 @@ class _OnboardingState extends State<Onboarding> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'Keep track of all your cars in one application, schedule maintentance.',
+                                          'Keep all your cars on way with fixer, you always have best performance.'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall,
@@ -198,7 +193,7 @@ class _OnboardingState extends State<Onboarding> {
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 0, 20),
                                       child: Image.asset(
-                                        'assets/images/homepage_hero.png',
+                                        Assets.imagesOnboarding1,
                                         width: 300,
                                         height: 300,
                                         fit: BoxFit.fitWidth,
@@ -214,7 +209,7 @@ class _OnboardingState extends State<Onboarding> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'Full Control',
+                                          'Keep Tracking'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium,
@@ -231,7 +226,7 @@ class _OnboardingState extends State<Onboarding> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'Always have control over your car, prestart it, review battery life, temp and range.',
+                                          'Always track your cars\'s services, performance and bills.'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall,
@@ -259,7 +254,7 @@ class _OnboardingState extends State<Onboarding> {
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0, 30, 0, 30),
                                       child: Image.asset(
-                                        'assets/images/homepage_hero.png',
+                                        Assets.imagesOnboarding1,
                                         width: 300,
                                         height: 250,
                                         fit: BoxFit.fitWidth,
@@ -275,7 +270,7 @@ class _OnboardingState extends State<Onboarding> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'Never Lose Your Car',
+                                          'Service Reminder'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .headlineMedium,
@@ -292,7 +287,7 @@ class _OnboardingState extends State<Onboarding> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'Always track your car with integrated GPS, sharing rides has never been easier.',
+                                          'Always keep your cars in best performance by making them regular services.'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
                                               .titleSmall
@@ -369,7 +364,7 @@ class _OnboardingState extends State<Onboarding> {
                         };
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Login(savedAccounts: savedAccounts,),));
                       },
-                      text: 'Continue',
+                      text: 'Continue'.tr(),
                       options: FFButtonOptions(
                         width: 200,
                         height: 50,

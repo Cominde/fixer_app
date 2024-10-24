@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
+import 'package:fixer_app/generated/assets.dart';
 /*import 'package:fixer_app/screens/car_performance/car_performance.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -145,7 +147,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
               ),
             ),
             title: Text(
-              'My Car',
+              'My Car'.tr(),
               style: FlutterFlowTheme.of(context).bodyMedium,
             ),
             actions: [],
@@ -167,7 +169,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/images/865452244861.png',
+                              Assets.imagesGrayTeslaCar,
                               width: MediaQuery.sizeOf(context).width,
                               height: 200,
                               fit: BoxFit.cover,
@@ -184,7 +186,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                             readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Car Model',
+                              labelText: 'Car Type'.tr(),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -249,7 +251,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                             readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Color',
+                              labelText: 'Color'.tr(),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -314,7 +316,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                             readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Year',
+                              labelText: 'Model'.tr(),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -379,7 +381,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                             readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Distance',
+                              labelText: 'Distance'.tr(),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -444,7 +446,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                             readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Chassis Number',
+                              labelText: 'Chassis Number'.tr(),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -509,7 +511,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                             readOnly: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'Motor Number',
+                              labelText: 'Motor Number'.tr(),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -572,7 +574,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Text(
-                                'Car ID',
+                                'Car Plate'.tr(),
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
                             ],

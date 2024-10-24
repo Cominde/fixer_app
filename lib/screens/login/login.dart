@@ -1,11 +1,12 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
+import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/screens/accounts/accounts.dart';
 import 'package:fixer_app/screens/forget_password/forget_password.dart';
 import 'package:fixer_app/screens/layout/layout.dart';
 import 'package:fixer_app/shared/components.dart';
-/*import 'package:fixer_app/variables/language/language.dart';*/
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
@@ -14,8 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-/*import 'dart:ui' as ui;*/
 
 
 
@@ -57,13 +56,13 @@ class _LoginStateState extends State<Login> {
                 MaterialPageRoute(
                   builder: (context) => const Layout(),
                 ));
-            showToast('Login Successfully');
+            showToast('Login Successfully'.tr());
           }
 
         else if (state is AppLoginErrorState)
           {
             //print(state.error);
-            showToast('Failed to Login');
+            showToast('Failed to Login'.tr());
           }
 
       },
@@ -79,7 +78,7 @@ class _LoginStateState extends State<Login> {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: Image.asset(
-                  'assets/images/34193997432.png',
+                  Assets.imagesBackgroundGarage,
                 ).image,
               ),
             ),
@@ -104,12 +103,12 @@ class _LoginStateState extends State<Login> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Image.asset(
-                                'assets/images/logo.png',
+                                Assets.imagesLogo,
                                 width: 160,
-                                height: 90,
+                                height: 100,
                                 fit: BoxFit.fitWidth,
                               ),
-                              /*Padding(
+                              Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -117,28 +116,17 @@ class _LoginStateState extends State<Login> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () {
-                                    setState(() {
-                                      engApp = !engApp;
-                                    });
+                                    context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
                                   },
-                                  child: engApp
-                                      ? Text(
-                                    "E",
+                                  child: Text(
+                                    'E'.tr(),
                                     style: TextStyle(
                                       color: Color(0xFF95A1AC),
                                       fontSize: 20,
                                     ),
-                                  )
-                                      : Text(
-                                    "ع",
-                                    style: TextStyle(
-                                      color: Color(0xFF95A1AC),
-                                      fontSize: 20,
-                                    ),
-                                    textDirection: ui.TextDirection.rtl,
                                   ),
                                 ),
-                              )*/
+                              )
                             ],
                           ),
                         ),
@@ -146,7 +134,7 @@ class _LoginStateState extends State<Login> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              'Welcome!',
+                              'Welcome!'.tr(),
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
                                   .override(
@@ -165,7 +153,7 @@ class _LoginStateState extends State<Login> {
                                 padding:
                                 const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 24),
                                 child: Text(
-                                  'To the future of car service',
+                                  'To the future of car service'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .headlineSmall
                                       .override(
@@ -191,7 +179,7 @@ class _LoginStateState extends State<Login> {
                                   textInputAction: TextInputAction.next,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Code',
+                                    labelText: 'Code'.tr(),
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
@@ -242,14 +230,10 @@ class _LoginStateState extends State<Login> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return 'please enter your code';
+                                      return 'Please enter your code'.tr();
                                     }
                                     return null;
                                   },
-                                  // inputFormatters: [
-                                  //   FilteringTextInputFormatter.allow(RegExp(
-                                  //       'FilteringTextInputFormatter.deny(RegExp(r\'\\s\'))'))
-                                  // ],
                                 ),
                               ),
                             ],
@@ -268,14 +252,13 @@ class _LoginStateState extends State<Login> {
                                   textInputAction: TextInputAction.done,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Password',
+                                    labelText: 'Password'.tr(),
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .bodySmall
                                         .override(
                                       fontFamily: 'Outfit',
                                       color: const Color(0xFFF68B1E),
                                     ),
-                                    //  hintText: 'Enter your passwoed here...',
                                     hintStyle:
                                     FlutterFlowTheme.of(context).bodySmall,
                                     enabledBorder: OutlineInputBorder(
@@ -320,14 +303,10 @@ class _LoginStateState extends State<Login> {
                                   ),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return 'please enter your password';
+                                      return 'Please enter your password'.tr();
                                     }
                                     return null;
                                   },
-                                  // inputFormatters: [
-                                  //   FilteringTextInputFormatter.allow(RegExp(
-                                  //       'FilteringTextInputFormatter.deny(RegExp(r\'\\s\'))'))
-                                  // ],
                                 ),
                               ),
                             ],
@@ -339,40 +318,31 @@ class _LoginStateState extends State<Login> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  /*context.pushNamed('createAccount');*/
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Don\'t have an account?',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Colors.white,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                      ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Don\'t have an account?'.tr(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
                                     ),
-                                    Text(
-                                      'Visit our center to create \nan account',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                        fontFamily: 'Outfit',
-                                        color: Colors.white,
-                                      ),
+                                  ),
+                                  Text(
+                                    'Visit our center to create \nan account'.tr(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                      fontFamily: 'Outfit',
+                                      color: Colors.white,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                               ConditionalBuilder(
                                 condition: state is AppLoginLoadingState,
@@ -401,7 +371,7 @@ class _LoginStateState extends State<Login> {
                                         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Layout(),));
                                       }
                                     },
-                                    text: 'Login',
+                                    text: 'Login'.tr(),
                                     options: FFButtonOptions(
                                       width: MediaQuery.sizeOf(context).width * 0.35,
                                       height: MediaQuery.sizeOf(context).height * 0.065,
@@ -450,15 +420,13 @@ class _LoginStateState extends State<Login> {
                                             0, 12, 0, 0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            //print(widget.savedAccounts);
-                                            //print('----------------------');
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>Accounts(savedAccounts: widget.savedAccounts,),
                                                 ));
                                           },
-                                          text: 'Login with saved account?',
+                                          text: 'Login with saved account?'.tr(),
                                           options: FFButtonOptions(
                                             width: 200,
                                             height: 30,
@@ -496,7 +464,7 @@ class _LoginStateState extends State<Login> {
                                                   builder: (context) =>const ForgotPassword(),
                                                 ));
                                           },
-                                          text: 'Forgot your password?',
+                                          text: 'Forgot your password?'.tr(),
                                           options: FFButtonOptions(
                                             width: 170,
                                             height: 30,
@@ -524,7 +492,7 @@ class _LoginStateState extends State<Login> {
                                         ),
                                       ),
                                       AutoSizeText(
-                                        'Visit our Social Pages',
+                                        'Visit our Social Pages'.tr(),
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.getFont(
                                           'Lexend Deca',
@@ -562,7 +530,7 @@ class _LoginStateState extends State<Login> {
                                                     BorderRadius.circular(50),
                                                   ),
                                                   child: Image.asset(
-                                                    'assets/images/instagram.png',
+                                                    Assets.imagesInstagram,
                                                     width: 50,
                                                     height: 50,
                                                     fit: BoxFit.cover,
@@ -591,7 +559,7 @@ class _LoginStateState extends State<Login> {
                                                     BorderRadius.circular(50),
                                                   ),
                                                   child: Image.asset(
-                                                    'assets/images/facebook.png',
+                                                    Assets.imagesFacebook,
                                                     width: 50,
                                                     height: 50,
                                                     fit: BoxFit.cover,
@@ -620,7 +588,7 @@ class _LoginStateState extends State<Login> {
                                                     BorderRadius.circular(50),
                                                   ),
                                                   child: Image.asset(
-                                                    'assets/images/whatsapp.png',
+                                                    Assets.imagesWhatsapp,
                                                     width: 50,
                                                     height: 50,
                                                     fit: BoxFit.cover,
@@ -645,7 +613,7 @@ class _LoginStateState extends State<Login> {
                                                   BorderRadius.circular(50),
                                                 ),
                                                 child: Image.asset(
-                                                  'assets/images/telephone.png',
+                                                  Assets.imagesTelephone,
                                                   width: 50,
                                                   height: 50,
                                                   fit: BoxFit.cover,

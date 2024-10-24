@@ -50,3 +50,5 @@ class AppGetHomePramsErrorState extends AppCubitStates{
   final String error;
   AppGetHomePramsErrorState(this.error);
 }
+
+class UpdateLungState extends AppCubitStates{}

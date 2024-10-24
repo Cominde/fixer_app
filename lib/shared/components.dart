@@ -2,7 +2,9 @@
 
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
+import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/shared/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -79,7 +81,7 @@ Widget serviceItemBuilder(Visit model, AppCubit cubit) {
                                     .start,
                                 children: [
                                   Text(
-                                    '${model.priceAfterDiscount}\$',
+                                    '${model.priceAfterDiscount} ${'EGP'.tr()}',
                                     style:
                                     FlutterFlowTheme.of(
                                         context)
@@ -96,10 +98,10 @@ Widget serviceItemBuilder(Visit model, AppCubit cubit) {
                                         .fromSTEB(
                                         0, 4, 0, 0),
                                     child: Text(
-                                      '${model.services.length} Service\$',
+                                      '${model.services.length} ${(model.services.length == 1 || model.services.length == 2 || model.services.length > 10)? 'Service'.tr() : 'Services'.tr()}',
                                       style: FlutterFlowTheme
                                           .of(context)
-                                          .titleMedium,
+                                          .bodyLarge,
                                     ),
                                   ),
                                   Padding(
@@ -108,7 +110,7 @@ Widget serviceItemBuilder(Visit model, AppCubit cubit) {
                                         .fromSTEB(
                                         0, 4, 0, 0),
                                     child: Text(
-                                      '#${model.type}',
+                                      '#${model.invoiceID}',
                                       style: FlutterFlowTheme
                                           .of(context)
                                           .bodySmall,
@@ -128,7 +130,7 @@ Widget serviceItemBuilder(Visit model, AppCubit cubit) {
                               topRight: Radius.circular(12),
                             ),
                             child: Image.asset(
-                              'assets/images/41723171321.png',
+                              Assets.imagesWhiteTeslaCar,
                               width: 160,
                               height: 100,
                               fit: BoxFit.cover,
@@ -168,7 +170,7 @@ Widget serviceItemBuilder(Visit model, AppCubit cubit) {
                               padding: EdgeInsetsDirectional
                                   .fromSTEB(12, 0, 0, 0),
                               child: Text(
-                                model.complete!?'Completed On':'In Progress',
+                                model.complete!?'Completed On'.tr():'In Progress'.tr(),
                                 style:
                                 FlutterFlowTheme.of(context)
                                     .bodySmall,
