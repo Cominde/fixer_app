@@ -516,7 +516,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                                           pw.TableRow(
                                                               children: [
                                                                 normalText(
-                                                                    widget.cubit.loginByCodeModel?.carData?.distance.toString()??'***' ,myFont
+                                                                    (widget.visit.distance??widget.cubit.loginByCodeModel?.carData?.distance??'***').toString() ,myFont
                                                                 ),
                                                               ]
                                                           ),
@@ -1268,7 +1268,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                               ),
                               Text(
-                                "${widget.visit.type}",
+                                (widget.visit.type??'').tr(),
                                 style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
                               ),
                             ],
@@ -1323,7 +1323,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                   child: Text(service.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                                 ),
                                 subtitle: Text("${service.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
-                                trailing: Text(service.state!,style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: service.state! == 'repairing'?const Color(0xFFF68B1E):FlutterFlowTheme.of(context).success),),
+                                trailing: Text((service.state??'').tr(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: service.state! == 'Repairing'?const Color(0xFFF68B1E):FlutterFlowTheme.of(context).success),),
                               );
                             }).toList(),
                           ),
@@ -1425,7 +1425,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                 ),
               ),
             ),
-            InkWell(
+            if(widget.visit.complete??false)InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
               hoverColor: Colors.transparent,

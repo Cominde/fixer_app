@@ -78,6 +78,8 @@ const Map<String, String> en = {
   'Completion Ratio':'Completion Ratio',
   'Service':'Service',
   'Completed On':'Completed On',
+  'Completed':'Completed',
+  'Repairing':'Repairing',
   'In Progress':'In Progress',
   'New Update': 'New Update',
   'New Version Available Now': 'New Version Available Now',
@@ -86,4 +88,6 @@ const Map<String, String> en = {
   'Repair': 'Repair',
   'Need to check': 'Need to check',
   'Km': 'Km',
+  'Regular':'Regular',
+  'Non-Regular':'Non-Regular',
 };

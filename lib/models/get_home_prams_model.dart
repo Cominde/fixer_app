@@ -11,7 +11,7 @@ class GetHomePramsModel{
   GetHomePramsModel.fromJson(Map <String,dynamic>?json)
   {
     json=json?['data'];
-    print(json);
+    //print(json);
     periodicRepairs=json?['periodicRepairs'];
     nonPeriodicRepairs=json?['nonperiodicRepairs'];
     if (json?['createdDate']!=null && json?['createdDate']!='-/-/-') {
@@ -30,7 +30,7 @@ class GetHomePramsModel{
     }
     if (json?['nextRepairDate']!=null && json?['nextRepairDate']!='-/-/-') {
       nextRepairDate=DateTime.parse(json?['nextRepairDate']);
-      print(nextRepairDate.toString());
+      //print(nextRepairDate.toString());
     }
   }
 }

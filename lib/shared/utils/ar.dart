@@ -78,6 +78,8 @@ const Map<String, String> ar = {
   'Completion Ratio':'نسبة الخصم',
   'Service':'مصنعية',
   'Completed On':'تمت',
+  'Completed':'تمت',
+  'Repairing':'جاري العمل علبها',
   'In Progress':'جاري العمل',
   'New Update': 'تحديث جديد',
   'New Version Available Now': 'تحديث جديد متوفر',
@@ -86,4 +88,6 @@ const Map<String, String> ar = {
   'Repair': 'في صيانة',
   'Need to check': 'تحتاج الي فحص',
   'Km': 'كم',
+  'Regular':'دورية',
+  'Non-Regular':'غير دورية',
 };

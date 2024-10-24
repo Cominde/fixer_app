@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage>
                                 ),
                               ),
                               Text(
-                                AppCubit.get(context).getHomePramsModel?.state??''.tr(),
+                                (AppCubit.get(context).getHomePramsModel?.state??'').tr(),
                                 style: FlutterFlowTheme.of(context)
                                     .displaySmall
                                     .override(
@@ -438,7 +438,7 @@ class _HomePageState extends State<HomePage>
                         width: MediaQuery.sizeOf(context).width * 0.87,
                         height: 120,
                         decoration: BoxDecoration(
-                          color: AppCubit.get(context).getHomePramsModel?.state == 'Good' ? const Color(0xff04A24C) : const Color(0xffDF3F3F),
+                          color: AppCubit.get(context).getHomePramsModel?.state == 'Need to check' ? const Color(0xffDF3F3F) : const Color(0xff04A24C),
                           boxShadow: const [
                             BoxShadow(
                               blurRadius: 4,

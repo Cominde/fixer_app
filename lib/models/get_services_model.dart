@@ -34,12 +34,12 @@ class Visit{
 
   Visit.fromJson(Map<String,dynamic>?json)
   {
-    print(json);
+    //print(json);
    id=json?['_id'];
    invoiceID=json?['genId'];
    discount=json?['discount'];
    carNumber=json?['carNumber'];
-   type=json?['type'];
+   type=json?['type'] == 'periodic' ? 'Regular' : 'Non-Regular';
    expectedDate=DateTime.parse(json?['expectedDate']);
    json?['Services'].forEach((element){
      services.add(Service.fromJson(element));
@@ -72,7 +72,7 @@ class Service{
   String?id;
   Service.fromJson(Map<String,dynamic>?json)
   {
-    state=json?['state'];
+    state=json?['state'] == 'completed' ? 'Completed' : 'Repairing';
     name=json?['name'];
     price=json?['price'];
     id=json?['_id'];
