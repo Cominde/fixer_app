@@ -7,6 +7,7 @@ class Assets {
   static const String imagesAppleAppIcon = 'assets/images/apple_app_Icon.png';
   static const String imagesBackgroundGarage = 'assets/images/background_garage.png';
   static const String imagesBillLogo = 'assets/images/bill_logo.png';
+  static const String imagesComindeLogo = 'assets/images/cominde_logo.png';
   static const String imagesFacebook = 'assets/images/facebook.png';
   static const String imagesGrayTeslaCar = 'assets/images/gray_tesla_car.png';
   static const String imagesInstagram = 'assets/images/instagram.png';

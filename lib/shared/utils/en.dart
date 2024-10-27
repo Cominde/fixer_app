@@ -91,4 +91,5 @@ const Map<String, String> en = {
   'Regular':'Regular',
   'Non-Regular':'Non-Regular',
   'Next Service Distance': 'Next Service Distance',
+  'Powered by': 'Powered by',
 };

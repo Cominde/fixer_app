@@ -91,4 +91,5 @@ const Map<String, String> ar = {
   'Regular':'دورية',
   'Non-Regular':'غير دورية',
   'Next Service Distance': 'مسافة الصيانة القادمة',
+  'Powered by': 'يعمل بواسطة',
 };
