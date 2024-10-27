@@ -1,6 +1,6 @@
 name: fixer_app
 description: A new Flutter project.
-version: 1.3.0
+version: 1.4.0
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -53,6 +53,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/Hacen_Tunisia/
+    - assets/translations/
 
 icons_launcher:
   image_path: "assets/images/android_app_icon.png"

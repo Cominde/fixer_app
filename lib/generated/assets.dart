@@ -22,5 +22,7 @@ class Assets {
   static const String imagesTelephone = 'assets/images/telephone.png';
   static const String imagesWhatsapp = 'assets/images/whatsapp.png';
   static const String imagesWhiteTeslaCar = 'assets/images/white_tesla_car.png';
+  static const String translationsAr = 'assets/translations/ar.json';
+  static const String translationsEn = 'assets/translations/en.json';
 
 }

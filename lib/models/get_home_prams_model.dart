@@ -8,6 +8,7 @@ class GetHomePramsModel{
   DateTime?nextRepairDate;
   int? periodicRepairs;
   int ?nonPeriodicRepairs;
+  int ?nextRepairDistance;
   GetHomePramsModel.fromJson(Map <String,dynamic>?json)
   {
     json=json?['data'];
@@ -32,5 +33,6 @@ class GetHomePramsModel{
       nextRepairDate=DateTime.parse(json?['nextRepairDate']);
       //print(nextRepairDate.toString());
     }
+    nextRepairDistance=json?['nextRepairDistance'];
   }
 }

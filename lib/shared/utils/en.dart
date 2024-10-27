@@ -90,4 +90,5 @@ const Map<String, String> en = {
   'Km': 'Km',
   'Regular':'Regular',
   'Non-Regular':'Non-Regular',
+  'Next Service Distance': 'Next Service Distance',
 };

@@ -436,7 +436,7 @@ class _HomePageState extends State<HomePage>
                       padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 12),
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 0.87,
-                        height: 120,
+                        height: AppCubit.get(context).getHomePramsModel?.nextRepairDistance != null ? 170 : 120,
                         decoration: BoxDecoration(
                           color: AppCubit.get(context).getHomePramsModel?.state == 'Need to check' ? const Color(0xffDF3F3F) : const Color(0xff04A24C),
                           boxShadow: const [
@@ -475,18 +475,44 @@ class _HomePageState extends State<HomePage>
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
-                                child: Text(
-                                  'Next Service Date'.tr(),
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.getFont(
-                                    'Lexend Deca',
-                                    color: const Color(0xB3FFFFFF),
-                                    fontSize: 12,
-                                  ),
+                            Padding(
+                              padding:
+                              const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
+                              child: Text(
+                                'Next Service Date'.tr(),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.getFont(
+                                  'Lexend Deca',
+                                  color: const Color(0xB3FFFFFF),
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                            if(AppCubit.get(context).getHomePramsModel?.nextRepairDistance != null)Padding(
+                              padding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                              child: AutoSizeText(
+                                '${AppCubit.get(context).getHomePramsModel?.nextRepairDistance} ${'Km'.tr()}',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .override(
+                                  fontFamily: 'Outfit',
+                                  color: FlutterFlowTheme.of(context)
+                                      .alternate,
+                                ),
+                              ),
+                            ),
+                            if(AppCubit.get(context).getHomePramsModel?.nextRepairDistance != null)Padding(
+                              padding:
+                              const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
+                              child: Text(
+                                'Next Service Distance'.tr(),
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.getFont(
+                                  'Lexend Deca',
+                                  color: const Color(0xB3FFFFFF),
+                                  fontSize: 12,
                                 ),
                               ),
                             ),

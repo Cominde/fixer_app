@@ -1408,7 +1408,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                               ),
                               Text(
-                                "${widget.visit.completedServicesRatio} %",
+                                "${(widget.visit.completedServicesRatio??0)*100} %",
                                 style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
                               ),
                             ],

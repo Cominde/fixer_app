@@ -90,4 +90,5 @@ const Map<String, String> ar = {
   'Km': 'كم',
   'Regular':'دورية',
   'Non-Regular':'غير دورية',
+  'Next Service Distance': 'مسافة الصيانة القادمة',
 };
