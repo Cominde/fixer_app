@@ -74,6 +74,7 @@ class GetCarByNumberModel{
 
   GetCarByNumberModel.fromJson(Map<String,dynamic>?json)
   {
+    print(json);
     state=json?['State'];
     id=json?['_id'];
     ownerName=json?['ownerName'];

@@ -44,7 +44,6 @@ Widget serviceItemBuilder(Visit model, AppCubit cubit) {
               condition: model.id==null,
               builder: (context) => Center(child: CircularProgressIndicator(),),
               fallback: (context) => Container(
-                width: 100,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context)
                       .secondaryBackground,

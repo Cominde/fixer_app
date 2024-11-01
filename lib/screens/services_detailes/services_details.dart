@@ -10,6 +10,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 
 import 'services_details_model.dart';
 export 'services_details_model.dart';
@@ -502,7 +503,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                                           pw.TableRow(
                                                               children: [
                                                                 normalText(
-                                                                    widget.cubit.loginByCodeModel?.carData?.carIdNumber??'***' ,myFont
+                                                                    widget.cubit.loginByCodeModel?.carData?.chassisNumber??'***' ,myFont
                                                                 ),
                                                               ]
                                                           ),
@@ -572,7 +573,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                                           pw.TableRow(
                                                               children: [
                                                                 normalText(
-                                                                    '***' ,myFont
+                                                                    widget.visit.invoiceID != null ? widget.visit.invoiceID!.substring(2) : '***' ,myFont
                                                                 ),
                                                               ]
                                                           ),
@@ -735,7 +736,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                               ),
                                               pw.Center(
                                                 child: boldText(
-                                                    'مصنعات',myFont
+                                                    'مصنعيات',myFont
                                                 ),
                                               ),
                                               pw.SizedBox(
@@ -1077,6 +1078,74 @@ class _ServicesDetailsState extends State<ServicesDetails>
 
         pdf.save().then((value) {
           pdfBytes = value;
+
+          showDialog(context: context, builder: (context) => Dialog(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: MediaQuery.sizeOf(context).width*1.25,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.print_rounded),
+                          onPressed: () async {
+                            await printArabicPdf(pdf);
+                          },
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: PDFView(
+                            pdfData: pdfBytes,
+                            enableSwipe: true,
+                            swipeHorizontal: true,
+                            autoSpacing: false,
+                            pageFling: false,
+                            backgroundColor: Colors.grey,
+                            /*onRender: (_pages) {
+                              setState(() {
+                                pages = _pages;
+                                isReady = true;
+                              });
+                            },
+                            onError: (error) {
+                              print(error.toString());
+                            },
+                            onPageError: (page, error) {
+                              print('$page: ${error.toString()}');
+                            },
+                            onViewCreated: (PDFViewController pdfViewController) {
+                              _controller.complete(pdfViewController);
+                            },
+                            onPageChanged: (int page, int total) {
+                              print('page change: $page/$total');
+                            },*/
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+          ),);
+
           setState(() {
             isLoading = false;
           });
@@ -1432,7 +1501,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
               highlightColor: Colors.transparent,
               onTap: () async {
                 buildPdf();
-                await printArabicPdf(pdf);
+                //await printArabicPdf(pdf);
               },
               child: Container(
                 width: double.infinity,

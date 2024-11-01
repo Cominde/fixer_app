@@ -194,63 +194,41 @@ class _ServicesPageState extends State<ServicesPage>
                     ),
                   ),
                 ),
-                fallback: (context) =>  SafeArea(
-                  top: true,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                fallback: (context) =>  Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 16),
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      AppCubit.get(context).getCarServicesByNumber(carNumber: AppCubit.get(context).loginByCodeModel!.carData!.carNumber!);
+                    },
+                    child: ListView(
                       children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 16),
-                          child: Builder(
-                            builder: (context) {
-                              return AppCubit.get(context).getServicesModel!.visits.isEmpty ? Center(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 32),
-                                      child: Image(image: AssetImage(Assets.imagesNoServices),),
-                                    ),
-                                    Text(
-                                      'No Services Found'.tr(),
-                                      style: TextStyle(
-                                          color: Color(0xFFF68B1E),
-                                          fontSize: 50,
-                                          fontWeight: FontWeight.bold,
-
-                                          shadows: [
-                                            Shadow(color: Colors.black12, blurRadius: 10, offset: Offset(10,10))
-                                          ]
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    )
-                                  ],
-                                ),
-                              ) :ListView.builder(
-                                padding: EdgeInsets.zero,
-                                primary: false,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: AppCubit.get(context).getServicesModel?.visits.length,
-                                itemBuilder: (context, index) =>serviceItemBuilder(AppCubit.get(context).getServicesModel!.visits[index],AppCubit.get(context)),
-                              );
-                            },
-                          ),
+                        if(AppCubit.get(context).getServicesModel!.visits.isEmpty)Padding(
+                          padding: EdgeInsets.symmetric(vertical: 32),
+                          child: Image(image: AssetImage(Assets.imagesNoServices),),
                         ),
+                        if(AppCubit.get(context).getServicesModel!.visits.isEmpty)Text(
+                          'No Services Found'.tr(),
+                          style: TextStyle(
+                              color: Color(0xFFF68B1E),
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+
+                              shadows: [
+                                Shadow(color: Colors.black12, blurRadius: 10, offset: Offset(10,10))
+                              ]
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        if(AppCubit.get(context).getServicesModel!.visits.isNotEmpty) for(int index = 0; index < AppCubit.get(context).getServicesModel!.visits.length; index++)...[
+                          serviceItemBuilder(AppCubit.get(context).getServicesModel!.visits[index],AppCubit.get(context))
+                        ]
                       ],
                     ),
                   ),
                 ),
             )
-
-
           ),
         );
-
       },
     );
   }

@@ -112,8 +112,10 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
             ),
-            fallback: (context) => SafeArea(
-              top: true,
+            fallback: (context) => RefreshIndicator(
+              onRefresh: () async {
+                AppCubit.get(context).getHomePrams(carNumber: AppCubit.get(context).loginByCodeModel!.carData!.carNumber!);
+              },
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,

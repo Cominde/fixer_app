@@ -130,7 +130,7 @@ class AppCubit extends Cubit<AppCubitStates> {
   void getCarServicesByNumber({
     required String carNumber,
   }) async{
-
+    getServicesModel = GetServicesModel();
       emit(AppGetCarServicesByNumberLoadingState());
       String url =
           'https://fixer-backend-rtw4.onrender.com/api/V1/repairing/$carNumber';
@@ -162,6 +162,8 @@ class AppCubit extends Cubit<AppCubitStates> {
   void getHomePrams({
       required String carNumber,
   }) {
+    getHomePramsModel = GetHomePramsModel();
+    emit(AppGetHomePramsLoadingState());
       String url = 'https://fixer-backend-rtw4.onrender.com/api/V1/Home/$carNumber';
       final headers = {'Content-Type': 'application/json'};
        read(

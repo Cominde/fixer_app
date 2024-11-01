@@ -79,7 +79,7 @@ const Map<String, String> ar = {
   'Service':'مصنعية',
   'Completed On':'تمت',
   'Completed':'تمت',
-  'Repairing':'جاري العمل علبها',
+  'Repairing':'جاري العمل عليها',
   'In Progress':'جاري العمل',
   'New Update': 'تحديث جديد',
   'New Version Available Now': 'تحديث جديد متوفر',
@@ -90,6 +90,6 @@ const Map<String, String> ar = {
   'Km': 'كم',
   'Regular':'دورية',
   'Non-Regular':'غير دورية',
-  'Next Service Distance': 'مسافة الصيانة القادمة',
+  'Next Service Distance': 'كيلومتر الصيانة القادمة',
   'Powered by': 'يعمل بواسطة',
 };

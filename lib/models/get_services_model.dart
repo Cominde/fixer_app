@@ -29,6 +29,7 @@ class Visit{
   String? note1;
   String? note2;
   int? distance;
+  int ? nextRepairDistance;
   DateTime?createdAt;
   DateTime?updatedAt;
 
@@ -56,9 +57,10 @@ class Visit{
      completedServicesRatio=double.parse(json!['completedServicesRatio'].toString());
    }
    state=json?['State'];
-   note1=json?['note1'];
-   note2=json?['note2'];
+   note1=json?['Note1'];
+   note2=json?['Note2'];
    distance=json?['distance'];
+   nextRepairDistance=json?['nextRepairDistance'];
    createdAt=DateTime.parse(json?['createdAt']);
    updatedAt=DateTime.parse(json?['updatedAt']);
   }
