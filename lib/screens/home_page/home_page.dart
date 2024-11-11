@@ -122,29 +122,26 @@ class _HomePageState extends State<HomePage>
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(24, 16, 24, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'Your Car'.tr(),
-                            style: FlutterFlowTheme.of(context).bodySmall,
-                          ),
-                        ],
+                      child: Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: Text(
+                          'Your Car'.tr(),
+                          style: FlutterFlowTheme.of(context).bodySmall,
+                        ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(24, 4, 24, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            '${AppCubit.get(context).loginByCodeModel?.carData?.brand} ${AppCubit.get(context).loginByCodeModel?.carData?.category} ${AppCubit.get(context).loginByCodeModel?.carData?.model}',
-                            style: FlutterFlowTheme.of(context).displaySmall.override(
-                              fontFamily: 'Outfit',
-                              /*color: FlutterFlowTheme.of(context).dark400,*/
-                            ),
+                      child: Align(
+                        alignment: AlignmentDirectional.centerStart,
+                        child: AutoSizeText(
+                          '${AppCubit.get(context).loginByCodeModel?.carData?.brand} ${AppCubit.get(context).loginByCodeModel?.carData?.category} ${AppCubit.get(context).loginByCodeModel?.carData?.model}',
+                          textAlign: TextAlign.start,
+                          style: FlutterFlowTheme.of(context).displaySmall.override(
+                            fontFamily: 'Outfit',
+                            /*color: FlutterFlowTheme.of(context).dark400,*/
                           ),
-                        ],
+                        ),
                       ),
                     ),
                     Image.asset(

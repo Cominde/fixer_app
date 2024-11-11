@@ -859,12 +859,12 @@ class _ServicesDetailsState extends State<ServicesDetails>
                                                               ),
                                                               children: [
                                                                 normalText(
-                                                                    totalComponents.toString(),myFont
+                                                                    (totalComponents+totalAdditions).toString(),myFont
                                                                 ),
                                                                 pw.Container(
                                                                   color: const PdfColor(0.90196,0.90196,0.90196),
                                                                   child: normalText(
-                                                                      'صافي قطع الغيار',myFont
+                                                                      'صافي قطع الغيار و الاعمال الخارجية',myFont
                                                                   ),
                                                                 ),
                                                               ]
