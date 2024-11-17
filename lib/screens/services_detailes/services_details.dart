@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/models/get_services_model.dart';
+import 'package:fixer_app/shared/components.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutterflow_ui_pro/flutterflow_ui_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -198,16 +203,20 @@ class _ServicesDetailsState extends State<ServicesDetails>
   void initState() {
     super.initState();
     _model = createModel(context, () => ServicesDetailsModel());
-    if(widget.visit.services.isNotEmpty) {
-      totalServices = widget.visit.services.map((service) => service.price).reduce((a, b) => a! + b!)??0;
+    if (widget.visit.services.isNotEmpty) {
+      for(final e in widget.visit.services) {
+        totalServices += e.price??0;
+      }
     }
-
-    if(widget.visit.components.isNotEmpty) {
-      totalComponents = widget.visit.components.map((component) => component.price).reduce((a, b) => a! + b!)??0;
+    if (widget.visit.components.isNotEmpty) {
+      for(final e in widget.visit.components) {
+        totalComponents += (e.price??0)*(e.quantity??1);
+      }
     }
-
-    if(widget.visit.additions.isNotEmpty) {
-      totalAdditions = widget.visit.additions.map((addition) => addition.price).reduce((a, b) => a! + b!)??0;
+    if (widget.visit.additions.isNotEmpty) {
+      for(final e in widget.visit.additions) {
+        totalAdditions += e.price??0;
+      }
     }
 
     setupAnimations(
@@ -1097,11 +1106,22 @@ class _ServicesDetailsState extends State<ServicesDetails>
                             Navigator.pop(context);
                           },
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.print_rounded),
-                          onPressed: () async {
-                            await printArabicPdf(pdf);
-                          },
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.download_rounded),
+                              onPressed: () async {
+                                await savePdf(pdf);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.print_rounded),
+                              onPressed: () async {
+                                await printArabicPdf(pdf);
+                              },
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -1169,8 +1189,45 @@ class _ServicesDetailsState extends State<ServicesDetails>
     );
   }
 
-  Future<void> printArabicPdf (pw.Document pdf) async{
-    await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => pdf.save());
+  Future<void> printArabicPdf (pw.Document pdf) async {
+    try {
+      await Printing.layoutPdf(onLayout: (PdfPageFormat format) async => await pdf.save());
+    } catch (e) {
+      showToast(e.toString());
+    }
+  }
+
+  Future<void> savePdf(pw.Document pdf) async {
+    try {
+      // Create a temporary file in the app's directory
+      final AppCubit cubit = AppCubit.get(context);
+      final output = await getTemporaryDirectory();
+      final filePath = '${output.path}/${widget.visit.invoiceID}.pdf';
+
+      // Save the PDF file temporarily
+      final file = File(filePath);
+      await file.writeAsBytes(await pdf.save());
+
+      // Let the user pick a directory to save the file
+      String? selectedDirectory;
+      if (Platform.isWindows) {
+        selectedDirectory = await FilePicker.platform.getDirectoryPath();
+      } else if (Platform.isAndroid || Platform.isIOS) {
+        selectedDirectory = await FilePicker.platform.getDirectoryPath();
+      }
+
+      // If a directory was selected, move the file there
+      if (selectedDirectory != null) {
+        final newFilePath = '$selectedDirectory/${widget.visit.invoiceID}.pdf';
+        final newFile = await file.copy(newFilePath);
+
+        showToast('PDF saved to: $newFilePath');
+      } else {
+        //print('No directory selected.');
+      }
+    } catch (e) {
+      showToast(e.toString());
+    }
   }
 
   @override
