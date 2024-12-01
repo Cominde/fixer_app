@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
@@ -174,7 +175,7 @@ class _ServicesPageState extends State<ServicesPage>
             appBar: AppBar(
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               automaticallyImplyLeading: false,
-              title: Text(
+              title: AutoSizeText(
                 'My Service'.tr(),
                 style: FlutterFlowTheme.of(context).headlineMedium,
               ),
@@ -206,7 +207,7 @@ class _ServicesPageState extends State<ServicesPage>
                           padding: EdgeInsets.symmetric(vertical: 32),
                           child: Image(image: AssetImage(Assets.imagesNoServices),),
                         ),
-                        if(AppCubit.get(context).getServicesModel!.visits.isEmpty)Text(
+                        if(AppCubit.get(context).getServicesModel!.visits.isEmpty)AutoSizeText(
                           'No Services Found'.tr(),
                           style: TextStyle(
                               color: Color(0xFFF68B1E),

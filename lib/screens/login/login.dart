@@ -118,7 +118,7 @@ class _LoginStateState extends State<Login> {
                                   onTap: () {
                                     context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
                                   },
-                                  child: Text(
+                                  child: AutoSizeText(
                                     'E'.tr(),
                                     style: TextStyle(
                                       color: Color(0xFF95A1AC),
@@ -133,7 +133,7 @@ class _LoginStateState extends State<Login> {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Text(
+                            AutoSizeText(
                               'Welcome!'.tr(),
                               style: FlutterFlowTheme.of(context)
                                   .displaySmall
@@ -152,7 +152,7 @@ class _LoginStateState extends State<Login> {
                               child: Padding(
                                 padding:
                                 const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 24),
-                                child: Text(
+                                child: AutoSizeText(
                                   'To the future of car service'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .headlineSmall
@@ -322,7 +322,7 @@ class _LoginStateState extends State<Login> {
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  AutoSizeText(
                                     'Don\'t have an account?'.tr(),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -333,7 +333,7 @@ class _LoginStateState extends State<Login> {
                                       fontWeight: FontWeight.normal,
                                     ),
                                   ),
-                                  Text(
+                                  AutoSizeText(
                                     'Visit our center to create \nan account'.tr(),
                                     style: FlutterFlowTheme.of(context)
                                         .titleSmall

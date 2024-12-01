@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage>
                       padding: const EdgeInsetsDirectional.fromSTEB(24, 16, 24, 0),
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Text(
+                        child: AutoSizeText(
                           'Your Car'.tr(),
                           style: FlutterFlowTheme.of(context).bodySmall,
                         ),
@@ -177,12 +177,12 @@ class _HomePageState extends State<HomePage>
                             children: [
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Text(
+                                child: AutoSizeText(
                                   'Last Visit'.tr(),
                                   style: FlutterFlowTheme.of(context).bodySmall,
                                 ),
                               ),
-                              Text(
+                              AutoSizeText(
                                '${AppCubit.get(context).getHomePramsModel?.lastRepairDate?.day??'-'}/${AppCubit.get(context).getHomePramsModel?.lastRepairDate?.month??'-'}/${AppCubit.get(context).getHomePramsModel?.lastRepairDate?.year??'-'}',
                                 style: FlutterFlowTheme.of(context).displaySmall.override(
                                     fontFamily: 'Outfit',
@@ -197,12 +197,12 @@ class _HomePageState extends State<HomePage>
                             children: [
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Text(
+                                child: AutoSizeText(
                                   'Status'.tr(),
                                   style: FlutterFlowTheme.of(context).bodySmall,
                                 ),
                               ),
-                              Text(
+                              AutoSizeText(
                                 (AppCubit.get(context).getHomePramsModel?.state??'').tr(),
                                 style: FlutterFlowTheme.of(context)
                                     .displaySmall
@@ -247,7 +247,7 @@ class _HomePageState extends State<HomePage>
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Text(
+                                        AutoSizeText(
                                           '${'The Expected completion date'.tr()} ${AppCubit.get(context).getHomePramsModel?.expectedDate?.day??'-'}/${AppCubit.get(context).getHomePramsModel?.expectedDate?.month??'-'}/${AppCubit.get(context).getHomePramsModel?.expectedDate?.year??'-'}',
 
                                           style: FlutterFlowTheme.of(context)
@@ -345,7 +345,7 @@ class _HomePageState extends State<HomePage>
                                     child: Padding(
                                       padding:
                                       const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
-                                      child: Text(
+                                      child: AutoSizeText(
                                         'Regular Services'.tr(),
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.getFont(
@@ -414,7 +414,7 @@ class _HomePageState extends State<HomePage>
                                   child: Padding(
                                     padding:
                                     const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
-                                    child: Text(
+                                    child: AutoSizeText(
                                       'Non-Regular Services'.tr(),
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.getFont(
@@ -477,7 +477,7 @@ class _HomePageState extends State<HomePage>
                             Padding(
                               padding:
                               const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
-                              child: Text(
+                              child: AutoSizeText(
                                 'Next Service Date'.tr(),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.getFont(
@@ -505,7 +505,7 @@ class _HomePageState extends State<HomePage>
                             if(AppCubit.get(context).getHomePramsModel?.nextRepairDistance != null)Padding(
                               padding:
                               const EdgeInsetsDirectional.fromSTEB(8, 4, 8, 0),
-                              child: Text(
+                              child: AutoSizeText(
                                 'Next Service Distance'.tr(),
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.getFont(

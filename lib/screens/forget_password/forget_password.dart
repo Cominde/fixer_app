@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/shared/components.dart';
@@ -80,7 +81,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   size: 24,
                 ),
               ),
-              title: Text(
+              title: AutoSizeText(
                 'Forgot Password'.tr(),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Lexend Deca',
@@ -158,7 +159,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Text(
+                        AutoSizeText(
                           'Car Plate'.tr(),
                           style: FlutterFlowTheme.of(context).bodyLarge,
                         ),
@@ -289,7 +290,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Expanded(
-                          child: Text(
+                          child: AutoSizeText(
                             'We will send you your password using email.'.tr(),
                             style: FlutterFlowTheme.of(context).bodySmall,
                           ),

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
@@ -78,7 +79,7 @@ class _MyProfileState extends State<MyProfile> {
                 size: 24,
               ),
             ),
-            title: Text(
+            title: AutoSizeText(
               'My Profile'.tr(),
               style: FlutterFlowTheme.of(context).bodyMedium,
             ),

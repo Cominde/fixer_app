@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
@@ -164,7 +165,7 @@ class _ProfilePageState extends State<ProfilePage>
                             crossAxisAlignment:
                             CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              AutoSizeText(
                                 '${AppCubit.get(context).loginByCodeModel!.userData!.name}',
                                 style: FlutterFlowTheme.of(context)
                                     .headlineMedium,
@@ -173,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 padding:
                                 const EdgeInsetsDirectional.fromSTEB(
                                     0, 4, 0, 0),
-                                child: Text(
+                                child: AutoSizeText(
                                   '${AppCubit.get(context).loginByCodeModel!.userData!.email}',
                                   style: FlutterFlowTheme.of(context)
                                       .bodySmall,
@@ -193,7 +194,7 @@ class _ProfilePageState extends State<ProfilePage>
                           onTap: () {
                             context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
                           },
-                          child: Text(
+                          child: AutoSizeText(
                             'E'.tr(),
                             style: TextStyle(
                               color: Color(0xFF95A1AC),
@@ -252,7 +253,7 @@ class _ProfilePageState extends State<ProfilePage>
                               mainAxisAlignment:
                               MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   'Switch to Dark Mode'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium,
@@ -373,7 +374,7 @@ class _ProfilePageState extends State<ProfilePage>
                               mainAxisAlignment:
                               MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   'Switch to Light Mode'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium,
@@ -480,7 +481,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
+                                          AutoSizeText(
                                             'Switch to Arabic',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
@@ -502,7 +503,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                   child: Padding(
                                                     padding: EdgeInsetsDirectional
                                                         .fromSTEB(0, 0, 12, 5),
-                                                    child: Text(
+                                                    child: AutoSizeText(
                                                       "ع",
                                                       style: TextStyle(
                                                         color: Color(0xFF95A1AC),
@@ -580,7 +581,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
+                                          AutoSizeText(
                                             'Switch to English',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
@@ -601,7 +602,7 @@ class _ProfilePageState extends State<ProfilePage>
                                                   child: Padding(
                                                     padding: EdgeInsetsDirectional
                                                         .fromSTEB(8, 2, 0, 0),
-                                                    child: Text(
+                                                    child: AutoSizeText(
                                                       "E",
                                                       style: TextStyle(
                                                         color: Color(0xFF95A1AC),
@@ -691,7 +692,7 @@ class _ProfilePageState extends State<ProfilePage>
                               mainAxisAlignment:
                               MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   'My Car'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium,
@@ -756,7 +757,7 @@ class _ProfilePageState extends State<ProfilePage>
                               mainAxisAlignment:
                               MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   'My Profile'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium,
@@ -833,7 +834,7 @@ class _ProfilePageState extends State<ProfilePage>
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                          child: Text(
+                          child: AutoSizeText(
                             'Powered by'.tr(),
                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,

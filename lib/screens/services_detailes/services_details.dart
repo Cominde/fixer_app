@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fixer_app/cubit/cubit.dart';
@@ -1290,7 +1291,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                             child: Padding(
                               padding:
                                   const EdgeInsetsDirectional.fromSTEB(4, 0, 16, 0),
-                              child: Text(
+                              child: AutoSizeText(
                                 '#${widget.visit.invoiceID}',
 
                                 textAlign: TextAlign.end,
@@ -1376,11 +1377,11 @@ class _ServicesDetailsState extends State<ServicesDetails>
                         children: [
                           Row(
                             children: [
-                              Text(
+                              AutoSizeText(
                                 "${'Car Plate'.tr()}: ",
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                               ),
-                              Text(
+                              AutoSizeText(
                                 "${widget.visit.carNumber}",
                                 style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
                               ),
@@ -1389,11 +1390,11 @@ class _ServicesDetailsState extends State<ServicesDetails>
                           const SizedBox(height: 8),
                           Row(
                             children: [
-                              Text(
+                              AutoSizeText(
                                 "${'Service Type'.tr()}: ",
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                               ),
-                              Text(
+                              AutoSizeText(
                                 (widget.visit.type??'').tr(),
                                 style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
                               ),
@@ -1402,11 +1403,11 @@ class _ServicesDetailsState extends State<ServicesDetails>
                           if(widget.visit.distance!=null)const SizedBox(height: 8),
                           if(widget.visit.distance!=null)Row(
                             children: [
-                              Text(
+                              AutoSizeText(
                                 "${'Distance'.tr()}: ",
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                               ),
-                              Text(
+                              AutoSizeText(
                                 "${widget.visit.distance} ${'Km'.tr()}",
                                 style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
                               ),
@@ -1415,11 +1416,11 @@ class _ServicesDetailsState extends State<ServicesDetails>
                           if(!(widget.visit.complete??false))const SizedBox(height: 8),
                           if(!(widget.visit.complete??false))Row(
                             children: [
-                              Text(
+                              AutoSizeText(
                                 "${'Expected Completion Date'.tr()}: ",
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                               ),
-                              Text(
+                              AutoSizeText(
                                 "${widget.visit.expectedDate?.day}/${widget.visit.expectedDate?.month}/${widget.visit.expectedDate?.year}",
                                 style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
                               ),
@@ -1435,7 +1436,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                               ),
                             ),
                           ),
-                          Text(
+                          AutoSizeText(
                             "${'Labour'.tr()}:",
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
@@ -1446,10 +1447,10 @@ class _ServicesDetailsState extends State<ServicesDetails>
                               return ListTile(
                                 title: Padding(
                                   padding: const EdgeInsets.only(bottom: 5.0),
-                                  child: Text(service.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                  child: AutoSizeText(service.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                                 ),
-                                subtitle: Text("${service.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
-                                trailing: Text((service.state??'').tr(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: service.state! == 'Repairing'?const Color(0xFFF68B1E):FlutterFlowTheme.of(context).success),),
+                                subtitle: AutoSizeText("${service.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
+                                trailing: AutoSizeText((service.state??'').tr(),style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: service.state! == 'Repairing'?const Color(0xFFF68B1E):FlutterFlowTheme.of(context).success),),
                               );
                             }).toList(),
                           ),
@@ -1463,7 +1464,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                               ),
                             ),
                           ),
-                          Text(
+                          AutoSizeText(
                             "${'Additions'.tr()}:",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
@@ -1472,8 +1473,8 @@ class _ServicesDetailsState extends State<ServicesDetails>
                           Column(
                             children: widget.visit.additions.map((addition) {
                               return ListTile(
-                                title: Text(addition.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                                subtitle: Text("${addition.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
+                                title: AutoSizeText(addition.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                subtitle: AutoSizeText("${addition.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
                               );
                             }).toList(),
                           ),
@@ -1487,7 +1488,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                               ),
                             ),
                           ),
-                          Text(
+                          AutoSizeText(
                             "${'Spare Parts'.tr()}:",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
@@ -1496,10 +1497,10 @@ class _ServicesDetailsState extends State<ServicesDetails>
                           Column(
                             children: widget.visit.components.map((component) {
                               return ListTile(
-                                title: Text(component.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-                                subtitle: Text(
+                                title: AutoSizeText(component.name!,style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                                subtitle: AutoSizeText(
                                     "${component.price} ${'EGP'.tr()}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.normal),),
-                                trailing: Text(
+                                trailing: AutoSizeText(
                                   "x ${component.quantity}",style: const TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Color(0xFFF68B1E)),),
                               );
                             }).toList(),
@@ -1516,11 +1517,11 @@ class _ServicesDetailsState extends State<ServicesDetails>
                           ),
                           Row(
                             children: [
-                              Text(
+                              AutoSizeText(
                                 "${'Price After Discount'.tr()}: ",
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                               ),
-                              Text(
+                              AutoSizeText(
                                 "${widget.visit.priceAfterDiscount} ${'EGP'.tr()}",
                                 style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
                               ),
@@ -1529,18 +1530,18 @@ class _ServicesDetailsState extends State<ServicesDetails>
                           const SizedBox(height: 8),
                           Row(
                             children: [
-                              Text(
+                              AutoSizeText(
                                 "${'Completion Ratio'.tr()}: ",
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, color: Color(0xFFF68B1E)),
                               ),
-                              Text(
-                                "${(widget.visit.completedServicesRatio??0)*100} %",
+                              AutoSizeText(
+                                "${((widget.visit.completedServicesRatio??0)*100).toStringAsFixed(2)} %",
                                 style: const TextStyle(fontSize: 18,fontWeight: FontWeight.normal),
                               ),
                             ],
                           ),
                           /*SizedBox(height: 16),
-                          Text(
+                          AutoSizeText(
                             "State: ${widget.visit.state}",
                             style: TextStyle(fontSize: 18),
                           ),*/
@@ -1584,7 +1585,7 @@ class _ServicesDetailsState extends State<ServicesDetails>
                     color: Colors.white,
                     size: 30,
                   ):
-                  Text(
+                  AutoSizeText(
                     'Bill'.tr(),
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).headlineMedium.override(

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/shared/flutter_flow_theme.dart';
@@ -77,7 +78,7 @@ class _NewUpdateScreenState extends State<NewUpdateScreen> with TickerProviderSt
                         ),
                     ],
                   ),
-                  child: Text(
+                  child: AutoSizeText(
                     'New Update'.tr(),
                     style: TextStyle(
                       fontSize: 40,
@@ -107,7 +108,7 @@ class _NewUpdateScreenState extends State<NewUpdateScreen> with TickerProviderSt
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
+            child: AutoSizeText(
               'New Version Available Now'.tr(),
               style: FlutterFlowTheme.of(context).headlineMedium,
             ),
@@ -135,7 +136,7 @@ class _NewUpdateScreenState extends State<NewUpdateScreen> with TickerProviderSt
                             ),
                         ],
                       ),
-                      child: Text(
+                      child: AutoSizeText(
                         'Download New Version'.tr(),
                         style: FlutterFlowTheme.of(context)
                             .titleMedium

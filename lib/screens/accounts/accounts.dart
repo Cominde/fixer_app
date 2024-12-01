@@ -111,7 +111,7 @@ class _LoginStateState extends State<Accounts> {
                                 onTap: () {
                                   context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
                                 },
-                                child: Text(
+                                child: AutoSizeText(
                                   'E'.tr(),
                                   style: TextStyle(
                                     color: Color(0xFF95A1AC),
@@ -126,7 +126,7 @@ class _LoginStateState extends State<Accounts> {
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Text(
+                          AutoSizeText(
                             'Welcome!'.tr(),
                             style: FlutterFlowTheme.of(context)
                                 .displaySmall
@@ -145,7 +145,7 @@ class _LoginStateState extends State<Accounts> {
                             child: Padding(
                               padding:
                               const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 24),
-                              child: Text(
+                              child: AutoSizeText(
                                 'To the future of car service'.tr(),
                                 style: FlutterFlowTheme.of(context)
                                     .headlineSmall
@@ -169,7 +169,7 @@ class _LoginStateState extends State<Accounts> {
                               child: Padding(
                                 padding:
                                 const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 24),
-                                child: Text(
+                                child: AutoSizeText(
                                   'Your saved accounts'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .headlineSmall
@@ -241,7 +241,7 @@ class _LoginStateState extends State<Accounts> {
                                               CrossAxisAlignment
                                                   .start,
                                               children: [
-                                                Text(
+                                                AutoSizeText(
                                                   widget.savedAccounts['carsInfo']![i].toString(),
                                                   style:
                                                   FlutterFlowTheme.of(
@@ -258,7 +258,7 @@ class _LoginStateState extends State<Accounts> {
                                                   const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                       0, 4, 0, 0),
-                                                  child: Text(
+                                                  child: AutoSizeText(
                                                     "${'Code'.tr()}: ${widget.savedAccounts['codes']![i]}",
                                                     style: FlutterFlowTheme
                                                         .of(context)
@@ -270,7 +270,7 @@ class _LoginStateState extends State<Accounts> {
                                                   const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                       0, 4, 0, 0),
-                                                  child: Text(
+                                                  child: AutoSizeText(
                                                     "${'Password'.tr()}: ${widget.savedAccounts['passwords']![i]}",
                                                     style: FlutterFlowTheme
                                                         .of(context)
@@ -319,7 +319,7 @@ class _LoginStateState extends State<Accounts> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                AutoSizeText(
                                   'Don\'t have an account?'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -330,7 +330,7 @@ class _LoginStateState extends State<Accounts> {
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
-                                Text(
+                                AutoSizeText(
                                   'Visit our center to create \nan account'.tr(),
                                   style: FlutterFlowTheme.of(context)
                                       .titleSmall

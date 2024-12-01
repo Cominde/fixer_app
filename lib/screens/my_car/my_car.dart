@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/cubit/states.dart';
@@ -146,7 +147,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                 size: 24,
               ),
             ),
-            title: Text(
+            title: AutoSizeText(
               'My Car'.tr(),
               style: FlutterFlowTheme.of(context).bodyMedium,
             ),
@@ -573,7 +574,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Text(
+                              AutoSizeText(
                                 'Car Plate'.tr(),
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
@@ -604,7 +605,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    AutoSizeText(
                                       "EGYPT           مصر",
                                       style: TextStyle(
                                         fontSize: 24,
@@ -633,7 +634,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                                             MainAxisAlignment.center,
                                         children: [
 
-                                          Text(
+                                          AutoSizeText(
                                             '${AppCubit.get(context).loginByCodeModel?.carData?.carNumber}',
                                             style: TextStyle(
                                               fontSize: 45,
@@ -688,7 +689,7 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                     ),
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 44),
-                      child: Text(
+                      child: AutoSizeText(
                         'Car Performance',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context)

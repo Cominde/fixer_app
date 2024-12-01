@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/generated/assets.dart';
@@ -86,7 +87,7 @@ class _OnboardingState extends State<Onboarding> {
                     onTap: () {
                       context.read<AppCubit>().updateLung(lung: context.locale == const Locale('en')? 'ar':'en', context: context);
                     },
-                    child: Text(
+                    child: AutoSizeText(
                       'E'.tr(),
                       style: TextStyle(
                         color: Color(0xFF95A1AC),
@@ -147,7 +148,7 @@ class _OnboardingState extends State<Onboarding> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
+                                        child: AutoSizeText(
                                           'Fix Your Cars'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -164,7 +165,7 @@ class _OnboardingState extends State<Onboarding> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
+                                        child: AutoSizeText(
                                           'Keep all your cars on way with fixer, you always have best performance.'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -208,7 +209,7 @@ class _OnboardingState extends State<Onboarding> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
+                                        child: AutoSizeText(
                                           'Keep Tracking'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -225,7 +226,7 @@ class _OnboardingState extends State<Onboarding> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
+                                        child: AutoSizeText(
                                           'Always track your cars\'s services, performance and bills.'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -269,7 +270,7 @@ class _OnboardingState extends State<Onboarding> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
+                                        child: AutoSizeText(
                                           'Service Reminder'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -286,7 +287,7 @@ class _OnboardingState extends State<Onboarding> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        child: Text(
+                                        child: AutoSizeText(
                                           'Always keep your cars in best performance by making them regular services.'.tr(),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)

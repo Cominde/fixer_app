@@ -1,6 +1,6 @@
 name: fixer_app
 description: A new Flutter project.
-version: 1.5.0
+version: 1.6.0
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
