@@ -5,6 +5,15 @@ import 'package:fixer_app/main.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:fixer_app/cubit/cubit.dart';
+import 'package:fixer_app/shared/codegen_loader.g.dart';
+import 'package:fixer_app/shared/constant_data.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+
+
 
 Future<void> main() async {
 
@@ -12,7 +21,20 @@ Future<void> main() async {
 
   testWidgets('screenshot', (WidgetTester tester) async {
     // Render the UI of the app
-    await tester.pumpWidget(MyApp(true, {}));
+    await tester.pumpWidget(EasyLocalization(
+        path: 'assets/translations',
+        supportedLocales: const [
+          Locale('en'),
+          Locale('ar'),
+        ],
+        fallbackLocale: Locale(ConstantData.kDefaultLung),
+        startLocale: Locale('en'),
+        assetLoader: const CodegenLoader(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider (create: (BuildContext context) => AppCubit(),),
+          ],
+          child: MyApp(true, {}),)));
 
     String platformName = '';
 
