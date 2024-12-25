@@ -237,10 +237,18 @@ packages:
     dependency: transitive
     description:
       name: equatable
-      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.5"
+    version: "2.0.7"
+  extended_masked_text:
+    dependency: transitive
+    description:
+      name: extended_masked_text
+      sha256: "1599e6c2cea0b24214114c92679cf2c56cd9c8c1cac5dfc65c292bf3373b4b33"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -285,10 +293,10 @@ packages:
     dependency: transitive
     description:
       name: fl_chart
-      sha256: "94307bef3a324a0d329d3ab77b2f0c6e5ed739185ffc029ed28c0f9b019ea7ef"
+      sha256: "74959b99b92b9eebeed1a4049426fd67c4abc3c5a0f4d12e2877097d6a11ae08"
       url: "https://pub.dev"
     source: hosted
-    version: "0.69.0"
+    version: "0.69.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -298,10 +306,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_animate
-      sha256: "7c8a6594a9252dad30cc2ef16e33270b6248c4dedc3b3d06c86c4f3f4dc05ae5"
+      sha256: "7befe2d3252728afb77aecaaea1dec88a89d35b9b1d2eea6d04479e8af9117b5"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.0"
+    version: "4.5.2"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -318,14 +326,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
-  flutter_credit_card:
+  flutter_credit_card_plus:
     dependency: transitive
     description:
-      name: flutter_credit_card
-      sha256: dffaee369b0e64fb81e63e78d6410762f73b67346692bd2ae7bdcc6d911452e3
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1"
+      path: "."
+      ref: HEAD
+      resolved-ref: "5eb41b15c095c24b6dcfebe39fe60bfa817d3640"
+      url: "https://github.com/joeshwoa/flutter_credit_card_plus"
+    source: git
+    version: "1.0.0"
   flutter_inappwebview:
     dependency: transitive
     description:
@@ -465,11 +474,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
-      resolved-ref: fbd9810649cdb2653d400ea7002f2f3603ca15ca
+      ref: HEAD
+      resolved-ref: c55e652a96b8b5acf77467ddd03e2ac139175449
       url: "https://github.com/joeshwoa/flutterflow_ui_pro"
     source: git
-    version: "0.4.1"
+    version: "1.9.0"
   fluttertoast:
     dependency: "direct main"
     description:
@@ -482,10 +491,10 @@ packages:
     dependency: transitive
     description:
       name: font_awesome_flutter
-      sha256: "275ff26905134bcb59417cf60ad979136f1f8257f2f449914b2c3e05bbb4cd6f"
+      sha256: d3a89184101baec7f4600d58840a764d2ef760fe1c5a20ef9e6b0e9b24a07a3a
       url: "https://pub.dev"
     source: hosted
-    version: "10.7.0"
+    version: "10.8.0"
   from_css_color:
     dependency: transitive
     description:
@@ -762,10 +771,10 @@ packages:
     dependency: "direct main"
     description:
       name: percent_indicator
-      sha256: c37099ad833a883c9d71782321cb65c3a848c21b6939b6185f0ff6640d05814c
+      sha256: "0d77d5c6fa9b7f60202cedf748b568ba9ba38d3f30405d6ceae4da76f5185462"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.3"
+    version: "4.2.4"
   petitparser:
     dependency: transitive
     description:
@@ -826,18 +835,18 @@ packages:
     dependency: transitive
     description:
       name: rive
-      sha256: "468f0880d49c513e09fdfba26e4abd9d50433c2cf398210b62948d8de3837dd5"
+      sha256: "2551a44fa766a7ed3f52aa2b94feda6d18d00edc25dee5f66e72e9b365bb6d6c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.13.15"
+    version: "0.13.20"
   rive_common:
     dependency: transitive
     description:
       name: rive_common
-      sha256: a3e5786f8d85c89977062b9ceeb3b72a7c28f81e32fb68497744042ce20bee2f
+      sha256: "2ba42f80d37a4efd0696fb715787c4785f8a13361e8aea9227c50f1e78cf763a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.12"
+    version: "0.4.15"
   rxdart:
     dependency: transitive
     description:
@@ -943,10 +952,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite
-      sha256: "79a297dc3cc137e758c6a4baf83342b039e5a6d2436fcdf3f96a00adaaf2ad62"
+      sha256: "2d7299468485dca85efeeadf5d38986909c5eb0cd71fd3db2c2f000e6c9454bb"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
+    version: "2.4.1"
   sqflite_android:
     dependency: transitive
     description:
@@ -967,10 +976,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite_darwin
-      sha256: "769733dddf94622d5541c73e4ddc6aa7b252d865285914b6fcd54a63c4b4f027"
+      sha256: "96a698e2bc82bd770a4d6aab00b42396a7c63d9e33513a56945cbccb594c2474"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1-1"
+    version: "2.4.1"
   sqflite_platform_interface:
     dependency: transitive
     description:
@@ -1023,10 +1032,10 @@ packages:
     dependency: transitive
     description:
       name: table_calendar
-      sha256: "4ca32b2fc919452c9974abd4c6ea611a63e33b9e4f0b8c38dba3ac1f4a6549d1"
+      sha256: b2896b7c86adf3a4d9c911d860120fe3dbe03c85db43b22fd61f14ee78cdbb63
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.2"
+    version: "3.1.3"
   term_glyph:
     dependency: transitive
     description:
@@ -1183,10 +1192,10 @@ packages:
     dependency: transitive
     description:
       name: video_player_web
-      sha256: "6dcdd298136523eaf7dfc31abaf0dfba9aa8a8dbc96670e87e9d42b6f2caf774"
+      sha256: "881b375a934d8ebf868c7fb1423b2bfaa393a0a265fa3f733079a86536064a10"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.2"
+    version: "2.3.3"
   vm_service:
     dependency: transitive
     description:
