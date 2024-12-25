@@ -47,6 +47,10 @@ dev_dependencies:
   image: ^4.3.0
   lints: ^5.0.0
   icons_launcher: ^3.0.0
+  integration_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
 
   flutter_test:
     sdk: flutter
