@@ -18,7 +18,6 @@ Future<void> main() async {
   final IntegrationTestWidgetsFlutterBinding binding = IntegrationTestWidgetsFlutterBinding();
 
   DioHelper.init();
-  WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
 
   testWidgets('screenshot', (WidgetTester tester) async {
