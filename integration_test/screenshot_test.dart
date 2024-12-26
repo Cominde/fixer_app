@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:fixer_app/network/local/cache_helper.dart';
+import 'package:fixer_app/network/remote/dio_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:fixer_app/main.dart';
@@ -19,6 +21,10 @@ Future<void> main() async {
 
   final IntegrationTestWidgetsFlutterBinding binding = IntegrationTestWidgetsFlutterBinding();
 
+  DioHelper.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
+
   testWidgets('screenshot', (WidgetTester tester) async {
     // Render the UI of the app
     await tester.pumpWidget(EasyLocalization(
@@ -34,7 +40,8 @@ Future<void> main() async {
           providers: [
             BlocProvider (create: (BuildContext context) => AppCubit(),),
           ],
-          child: MyApp(true, {}),)));
+          child: MyApp(true, {}),))
+    );
 
     String platformName = '';
 
