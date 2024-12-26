@@ -17,10 +17,9 @@ Future<void> main() async {
 
   final IntegrationTestWidgetsFlutterBinding binding = IntegrationTestWidgetsFlutterBinding();
 
-  DioHelper.init();
-  await CacheHelper.init();
-
   testWidgets('screenshot', (WidgetTester tester) async {
+    DioHelper.init();
+    await CacheHelper.init();
     // Render the UI of the app
     await tester.pumpWidget(EasyLocalization(
         path: 'assets/translations',
