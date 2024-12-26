@@ -6,16 +6,12 @@ import 'package:integration_test/integration_test.dart';
 import 'package:fixer_app/main.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/cubit/cubit.dart';
 import 'package:fixer_app/shared/codegen_loader.g.dart';
 import 'package:fixer_app/shared/constant_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-
-
 
 Future<void> main() async {
 
