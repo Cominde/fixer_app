@@ -72,7 +72,7 @@ class _OnboardingState extends State<Onboarding> {
                   ),
                 if (Theme.of(context).brightness == Brightness.dark)
                   Image.asset(
-                    Assets.imagesLogo,
+                    Assets.imagesBillLogo,
                     width: 200,
                     height: 50,
                     fit: BoxFit.fitHeight,
