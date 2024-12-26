@@ -18,8 +18,6 @@ Future<void> main() async {
   final IntegrationTestWidgetsFlutterBinding binding = IntegrationTestWidgetsFlutterBinding();
 
   testWidgets('screenshot', (WidgetTester tester) async {
-    DioHelper.init();
-    await CacheHelper.init();
     // Render the UI of the app
     await tester.pumpWidget(EasyLocalization(
         path: 'assets/translations',
@@ -51,6 +49,9 @@ Future<void> main() async {
     } else {
       platformName = "web";
     }
+
+    DioHelper.init();
+    await CacheHelper.init();
 
     await tester.pumpAndSettle(); // Take the screenshot
     await binding.takeScreenshot('screenshot-onboarding-screen-$platformName');
