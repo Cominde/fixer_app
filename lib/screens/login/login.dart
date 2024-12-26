@@ -27,7 +27,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginStateState extends State<Login> {
-    var codeController = TextEditingController();
+
+  var codeController = TextEditingController();
 
   var passwordController = TextEditingController();
 
@@ -174,6 +175,7 @@ class _LoginStateState extends State<Login> {
                             children: [
                               Expanded(
                                 child: TextFormField(
+                                  key: Key('codeField'),
                                   controller: codeController,
                                   //  focusNode: _model.codeFocusNode,
                                   textInputAction: TextInputAction.next,
@@ -248,6 +250,7 @@ class _LoginStateState extends State<Login> {
                               Expanded(
                                 child: TextFormField(
                                   controller: passwordController,
+                                  key: Key('passwordField'),
                                   // focusNode: _model.codeFocusNode,
                                   textInputAction: TextInputAction.done,
                                   obscureText: false,
@@ -360,6 +363,7 @@ class _LoginStateState extends State<Login> {
                                 },
                                 fallback: (BuildContext context) {
                                   return  FFButtonWidget(
+                                    key: Key('loginButton'),
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
 

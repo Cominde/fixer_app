@@ -355,6 +355,7 @@ class _OnboardingState extends State<Onboarding> {
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                     child: FFButtonWidget(
+                      key: Key('navigateToLoginScreenButton'),
                       onPressed: () async {
                         /*context.pushNamed('HomePage');*/
                         CacheHelper.putData(key: 'onBoarding', value: false);

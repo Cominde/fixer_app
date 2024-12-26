@@ -68,6 +68,7 @@ class _LayoutState extends State<Layout> {
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
+                key: Key('homeButton'),
                 icon: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(
@@ -96,6 +97,7 @@ class _LayoutState extends State<Layout> {
                 ),
               ),
               BottomNavigationBarItem(
+                key: Key('servicesButton'),
                 icon: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(
@@ -124,6 +126,7 @@ class _LayoutState extends State<Layout> {
                 ),
               ),
               BottomNavigationBarItem(
+                key: Key('personButton'),
                 icon: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(

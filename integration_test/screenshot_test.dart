@@ -51,8 +51,21 @@ Future<void> main() async {
       platformName = "web";
     }
 
+    await tester.pumpAndSettle(); // Take the screenshot
+    await binding.takeScreenshot('screenshot-onboarding-screen-$platformName');
+    await tester.tap(find.byKey(Key('navigateToLoginScreenButton')));
     await tester.pumpAndSettle();
-    // Take the screenshot
-    await binding.takeScreenshot('screenshot-$platformName');
+    await binding.takeScreenshot('screenshot-login-screen-$platformName');
+    await tester.enterText(find.byKey(Key('codeField')), 'C156'); // Enter password
+    await tester.enterText(find.byKey(Key('passwordField')), '58261585'); // Tap the login button
+    await tester.tap(find.byKey(Key('loginButton')));
+    await tester.pumpAndSettle();
+    await binding.takeScreenshot('screenshot-home-screen-$platformName');
+    await tester.tap(find.byKey(Key('servicesButton')));
+    await tester.pumpAndSettle();
+    await binding.takeScreenshot('screenshot-services-screen-$platformName');
+    await tester.tap(find.byKey(Key('personButton')));
+    await tester.pumpAndSettle();
+    await binding.takeScreenshot('screenshot-person-screen-$platformName');
   });
 }
