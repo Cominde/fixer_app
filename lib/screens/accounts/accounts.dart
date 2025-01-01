@@ -373,8 +373,8 @@ class _LoginStateState extends State<Accounts> {
                                   },
                                   text: 'Login'.tr(),
                                   options: FFButtonOptions(
-                                    width: MediaQuery.sizeOf(context).width * 0.35,
-                                    height: MediaQuery.sizeOf(context).height * 0.065,
+                                    width: 140,
+                                    height: 56,
                                     padding:
                                     const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                                     iconPadding:

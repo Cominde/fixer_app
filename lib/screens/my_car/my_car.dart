@@ -629,21 +629,14 @@ class _MyCarState extends State<MyCar> with TickerProviderStateMixin {
                                           ),
                                         ],
                                       ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-
-                                          AutoSizeText(
-                                            '${AppCubit.get(context).loginByCodeModel?.carData?.carNumber}',
-                                            style: TextStyle(
-                                              fontSize: 45,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black,
-                                              letterSpacing: 2,
-                                            ),
-                                          ),
-                                        ],
+                                      child: AutoSizeText(
+                                        '${AppCubit.get(context).loginByCodeModel?.carData?.carNumber}',
+                                        style: TextStyle(
+                                          fontSize: 45,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          letterSpacing: 2,
+                                        ),
                                       ),
                                     ),
                                   ],
