@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'network/local/cache_helper.dart';
 import 'network/remote/dio_helper.dart';
@@ -73,7 +74,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     get(Uri.parse('https://fixer-backend-rtw4.onrender.com/api/V1/appVersion')).then((value) {
       setState(() {
-        updatedApp = json.decode(value.body)[0]['version'].toString() == "1.8.0";
+        updatedApp = json.decode(value.body)[0]['version'].toString() == "1.8.1";
       });
     },);
     super.initState();
@@ -83,40 +84,42 @@ class _MyAppState extends State<MyApp> {
     return BlocConsumer<AppCubit,AppCubitStates>(
       listener: (BuildContext context, AppCubitStates state) {  },
       builder: (context, state) {
-        return AdaptiveTheme(
-          light: ThemeData(
-            colorScheme: const ColorScheme.light(primary: Color(0xFFF68B1E)),
-
-            useMaterial3: true,
-            brightness: Brightness.light,
-
-          ),
-          dark: ThemeData(
-            colorScheme: const ColorScheme.dark(primary: Color(0xFFF68B1E)),
-
-            useMaterial3: true,
-            brightness: Brightness.dark,
-
-          ),
-          initial: AdaptiveThemeMode.light,
-          builder: (theme, darkTheme) => MaterialApp(
-            title: 'Fixer',
-            theme: theme,
-            darkTheme: darkTheme,
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            home: updatedApp == null ? const Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: SpinKitDualRing(
-                  color: Color(0xFFF68B1E),
-                  size: 50,
+        return ResponsiveSizer(
+            builder: (context, orientation, screenType) => AdaptiveTheme(
+            light: ThemeData(
+              colorScheme: const ColorScheme.light(primary: Color(0xFFF68B1E)),
+          
+              useMaterial3: true,
+              brightness: Brightness.light,
+          
+            ),
+            dark: ThemeData(
+              colorScheme: const ColorScheme.dark(primary: Color(0xFFF68B1E)),
+          
+              useMaterial3: true,
+              brightness: Brightness.dark,
+          
+            ),
+            initial: AdaptiveThemeMode.light,
+            builder: (theme, darkTheme) => MaterialApp(
+              title: 'Fixer',
+              theme: theme,
+              darkTheme: darkTheme,
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              home: updatedApp == null ? const Center(
+                child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: SpinKitDualRing(
+                    color: Color(0xFFF68B1E),
+                    size: 50,
+                  ),
                 ),
-              ),
-            ) : (updatedApp! ? (widget.onBoarding?const Onboarding():widget.savedAccounts['codes']!.isNotEmpty?Accounts(savedAccounts: widget.savedAccounts,):Login(savedAccounts: widget.savedAccounts,)) : const NewUpdateScreen()),
+              ) : (updatedApp! ? (widget.onBoarding?const Onboarding():widget.savedAccounts['codes']!.isNotEmpty?Accounts(savedAccounts: widget.savedAccounts,):Login(savedAccounts: widget.savedAccounts,)) : const NewUpdateScreen()),
+            ),
           ),
         );
       },

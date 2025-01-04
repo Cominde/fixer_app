@@ -321,87 +321,93 @@ class _LoginStateState extends State<Login> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  AutoSizeText(
-                                    'Don\'t have an account?'.tr(),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      AutoSizeText(
+                                        'Don\'t have an account?'.tr(),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                      AutoSizeText(
+                                        'Visit our center to create \nan account'.tr(),
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                          fontFamily: 'Outfit',
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  AutoSizeText(
-                                    'Visit our center to create \nan account'.tr(),
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                      fontFamily: 'Outfit',
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
                               ),
-                              ConditionalBuilder(
-                                condition: state is AppLoginLoadingState,
-                                builder: (BuildContext context) {
-                                  return const Center(
-                                    child: SizedBox(
-                                      width: 35,
-                                      height: 35,
-                                      child: SpinKitDualRing(
-                                        color: Color(0xFFF68B1E),
-                                        size: 30,
+                              SizedBox(width: 8,),
+                              Expanded(
+                                flex: 2,
+                                child: ConditionalBuilder(
+                                  condition: state is AppLoginLoadingState,
+                                  builder: (BuildContext context) {
+                                    return const Center(
+                                      child: SizedBox(
+                                        width: 35,
+                                        height: 35,
+                                        child: SpinKitDualRing(
+                                          color: Color(0xFFF68B1E),
+                                          size: 30,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                                fallback: (BuildContext context) {
-                                  return  FFButtonWidget(
-                                    key: Key('loginButton'),
-                                    onPressed: () {
-                                      if (formKey.currentState!.validate()) {
+                                    );
+                                  },
+                                  fallback: (BuildContext context) {
+                                    return  FFButtonWidget(
+                                      key: Key('loginButton'),
+                                      onPressed: () {
+                                        if (formKey.currentState!.validate()) {
 
-                                        AppCubit.get(context).loginByCode(
-                                          carCode: codeController.text,
-                                          password: passwordController.text,
-                                        );
+                                          AppCubit.get(context).loginByCode(
+                                            carCode: codeController.text,
+                                            password: passwordController.text,
+                                          );
 
-                                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Layout(),));
-                                      }
-                                    },
-                                    text: 'Login'.tr(),
-                                    options: FFButtonOptions(
-                                      width: 140,
-                                      height: 56,
-                                      padding:
-                                      const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                                      iconPadding:
-                                      const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                                      color: const Color(0xFFF68B1E),
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleMedium
-                                          .override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Layout(),));
+                                        }
+                                      },
+                                      text: 'Login'.tr(),
+                                      options: FFButtonOptions(
+                                        height: 56,
+                                        padding:
+                                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                        iconPadding:
+                                        const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                        color: const Color(0xFFF68B1E),
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        elevation: 3,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(50),
                                       ),
-                                      elevation: 3,
-                                      borderSide: const BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
 
+                                ),
                               ),
                             ],
                           ),

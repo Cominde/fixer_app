@@ -315,89 +315,96 @@ class _LoginStateState extends State<Accounts> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                AutoSizeText(
-                                  'Don\'t have an account?'.tr(),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.transparent,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                                AutoSizeText(
-                                  'Visit our center to create \nan account'.tr(),
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                    fontFamily: 'Outfit',
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ConditionalBuilder(
-                              condition: state is AppLoginLoadingState,
-                              builder: (BuildContext context) {
-                                return const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: SizedBox(
-                                      width: 35,
-                                      height: 35,
-                                      child: SpinKitDualRing(
-                                        color: Color(0xFFF68B1E),
-                                        size: 30,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                              fallback: (BuildContext context) {
-                                return  FFButtonWidget(
-                                  onPressed: () {
-                                    if (selected!=-1) {
-
-                                      AppCubit.get(context).loginByCode(
-                                        carCode: widget.savedAccounts['codes']![selected],
-                                        password: widget.savedAccounts['passwords']![selected],
-                                      );
-
-                                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Layout(),));
-                                    }
-                                  },
-                                  text: 'Login'.tr(),
-                                  options: FFButtonOptions(
-                                    width: 140,
-                                    height: 56,
-                                    padding:
-                                    const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                                    iconPadding:
-                                    const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                                    color: const Color(0xFFF68B1E),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleMedium
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AutoSizeText(
+                                    'Don\'t have an account?'.tr(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
                                         .override(
                                       fontFamily: 'Lexend Deca',
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    elevation: 3,
-                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
-                                      width: 1,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
                                     ),
-                                    borderRadius: BorderRadius.circular(50),
                                   ),
-                                );
-                              },
+                                  AutoSizeText(
+                                    'Visit our center to create \nan account'.tr(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                      fontFamily: 'Outfit',
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: 8,),
+                            Expanded(
+                              flex: 2,
+                              child: ConditionalBuilder(
+                                condition: state is AppLoginLoadingState,
+                                builder: (BuildContext context) {
+                                  return const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: SizedBox(
+                                        width: 35,
+                                        height: 35,
+                                        child: SpinKitDualRing(
+                                          color: Color(0xFFF68B1E),
+                                          size: 30,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                fallback: (BuildContext context) {
+                                  return  FFButtonWidget(
+                                    onPressed: () {
+                                      if (selected!=-1) {
 
+                                        AppCubit.get(context).loginByCode(
+                                          carCode: widget.savedAccounts['codes']![selected],
+                                          password: widget.savedAccounts['passwords']![selected],
+                                        );
+
+                                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Layout(),));
+                                      }
+                                    },
+                                    text: 'Login'.tr(),
+                                    options: FFButtonOptions(
+                                      width: 140,
+                                      height: 56,
+                                      padding:
+                                      const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                      iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                                      color: const Color(0xFFF68B1E),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      elevation: 3,
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                  );
+                                },
+
+                              ),
                             ),
                           ],
                         ),

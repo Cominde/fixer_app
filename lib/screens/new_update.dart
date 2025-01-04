@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fixer_app/generated/assets.dart';
 import 'package:fixer_app/shared/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewUpdateScreen extends StatefulWidget {
@@ -66,6 +67,7 @@ class _NewUpdateScreenState extends State<NewUpdateScreen> with TickerProviderSt
               builder: (context, child) {
                 return Container(
                   padding: const EdgeInsets.all(20),
+                  height: 10.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: FlutterFlowTheme.of(context).primaryBackground,
@@ -101,13 +103,14 @@ class _NewUpdateScreenState extends State<NewUpdateScreen> with TickerProviderSt
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Container(
+              height: 40.h,
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                 clipBehavior: Clip.antiAlias,
                 child: const Image(image: AssetImage(Assets.imagesNewUpdate),)
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.all(8),
             child: AutoSizeText(
               'New Version Available Now'.tr(),
               style: FlutterFlowTheme.of(context).headlineMedium,
